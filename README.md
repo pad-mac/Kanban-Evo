@@ -43,6 +43,7 @@ Copy those three files into the Obsidian plugin directory for testing.
 - `##` columns + `###` swimlanes, including collapse, rename, delete, reorder, and 2D drag/drop
 - mobile drag/autoscroll and editor-focus fixes
 - extensive lane-header / collapsed-column visual customization
+- ZotFlow Evo integration: items dragged from ZotFlow's library browser become source-note link cards; a board can follow a ZotFlow collection (board settings → "ZotFlow collection") and receives new items in its inbox list
 
 ## Upstream lineage
 

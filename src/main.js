@@ -6962,7 +6962,7 @@ else {
     if (m.length)
         return await Lk(e, m);
 } let u = a.getData("text/html"), l = a.getData("text/plain"), c = a.getData("text/uri-list"), d = i ? l || u : NN(u); return [RN(d || c || l || u || "").trim()]; }
-async function Nk(e, t, r) { let n = e.app.dragManager.draggable, i = t.view ? t.dataTransfer : t.clipboardData; switch (n == null ? void 0 : n.type) {
+async function Nk(e, t, r) { let n = e.app.dragManager.draggable, i = t.view ? t.dataTransfer : t.clipboardData; { let KbZf = await KbZfDropLinks(e, i); if (KbZf && KbZf.length) return KbZf; } switch (n == null ? void 0 : n.type) {
     case "file": return [ho(e, n.file, e.file.path)];
     case "files": return n.files.map(a => ho(e, a, e.file.path));
     case "folder": return n.file.children.map(a => a instanceof On.TFolder ? null : ho(e, a, e.file.path)).filter(a => a);
@@ -6982,6 +6982,403 @@ function Es({ position: e, destination: t, isCancel: r }) { let n = Za(e, t); if
 function hi(e, t, r) { e.style.getPropertyValue(t) !== r && e.style.setProperty(t, r); }
 function hd(e, t) { e.style.getPropertyValue(t) && e.style.removeProperty(t); }
 function pg(e, t, r, n, i) { let a = "htmldnd", o = nt(), s = e - 75, u = e + 75, l = t - 25, c = t + 25; return { scopeId: a, entityId: `${a}-${o}`, initial: [s, l, u, c], getParentScrollState() { return Ir; }, getParentScrollShift() { return Si; }, recalcInitial() { }, getHitbox() { return this.initial; }, getPath() { return []; }, getData() { return { viewId: n, type: ft.Item, id: o, content: r, accepts: [], win: i }; } }; }
+// ---------------------------------------------------------------------------
+// kanban-evo: ZotFlow Evo integration.
+//
+// - Items dragged out of ZotFlow's library browser become cards that link to
+//   their source notes (application/zotflow-source-links).
+// - A board can follow a ZotFlow collection (board settings): new top-level
+//   items of the collection and its sub-collections are added to the inbox
+//   list as links to their source notes. Imported item keys are remembered in
+//   the board settings, so a deleted or archived card does not come back, and
+//   cards are never removed when an item leaves the collection.
+//
+// ZotFlow's IndexedDB database is only ever read: it is opened without a
+// version (no upgrade), never created if missing, closed after each read and
+// closed at once when ZotFlow asks for a version change.
+// ---------------------------------------------------------------------------
+var KbZfObsidian = require("obsidian");
+var KbZfDbName = "zotflow-dev";
+var KbZfLinksMime = "application/zotflow-source-links";
+var KbZfPluginIds = ["zotflow-evo", "zotflow"];
+var KbZfChangedEvent = "zotflow-evo:collections-changed";
+var KbZfSettingCollection = "zotflow-collection";
+var KbZfSettingInbox = "zotflow-inbox";
+var KbZfSettingImported = "zotflow-imported";
+var KbZfDefaultInbox = "Inbox";
+var KbZfInboxInstance = null;
+function KbZfEnabled(app) {
+    try {
+        let p = app.plugins;
+        return KbZfPluginIds.some(id => p.enabledPlugins.has(id));
+    }
+    catch (e) {
+        return !1;
+    }
+}
+function KbZfOpenDb() {
+    return new Promise(resolve => {
+        let req, created = !1, done = !1, finish = v => { done || (done = !0, resolve(v)); };
+        try {
+            if (typeof indexedDB === "undefined")
+                return finish(null);
+            req = indexedDB.open(KbZfDbName);
+        }
+        catch (e) {
+            return finish(null);
+        }
+        req.onupgradeneeded = () => {
+            // The database does not exist: never create it.
+            created = !0;
+            try {
+                req.transaction.abort();
+            }
+            catch (e) { }
+        };
+        req.onsuccess = () => {
+            let db = req.result;
+            if (created || !db.objectStoreNames.contains("items") || !db.objectStoreNames.contains("collections")) {
+                try {
+                    db.close();
+                }
+                catch (e) { }
+                return finish(null);
+            }
+            db.onversionchange = () => { try {
+                db.close();
+            }
+            catch (e) { } };
+            finish(db);
+        };
+        req.onerror = ev => { try {
+            ev && ev.preventDefault && ev.preventDefault();
+        }
+        catch (e) { } finish(null); };
+        req.onblocked = () => finish(null);
+    });
+}
+function KbZfRequest(req) {
+    return new Promise((resolve, reject) => { req.onsuccess = () => resolve(req.result); req.onerror = () => reject(req.error); });
+}
+async function KbZfGetAll(db, store, query, index) {
+    if (!db.objectStoreNames.contains(store))
+        return [];
+    let s = db.transaction(store, "readonly").objectStore(store), src = index ? s.index(index) : s;
+    return (await KbZfRequest(query === void 0 ? src.getAll() : src.getAll(query))) || [];
+}
+async function KbZfWithDb(fn) {
+    let db = await KbZfOpenDb();
+    if (!db)
+        return null;
+    try {
+        return await fn(db);
+    }
+    finally {
+        try {
+            db.close();
+        }
+        catch (e) { }
+    }
+}
+function KbZfLibraryRange(libraryID) { return IDBKeyRange.bound([libraryID], [libraryID, []]); }
+function KbZfParseCollection(value) {
+    let m = /^(\d+):([A-Za-z0-9]+)$/.exec(String(value || "").trim());
+    return m ? { libraryID: Number(m[1]), key: m[2] } : null;
+}
+function KbZfCollectionValue(cfg) { return `${cfg.libraryID}:${cfg.key}`; }
+/** Visible (not trashed, not under a trashed parent) collections of a library, with their paths. */
+function KbZfCollectionPaths(cols) {
+    let byKey = new Map(cols.map(c => [c.key, c])), out = new Map(), path = (c, seen) => {
+        if (out.has(c.key))
+            return out.get(c.key);
+        if (c.trashed || seen.has(c.key))
+            return null;
+        seen.add(c.key);
+        let parent = c.parentCollection ? byKey.get(c.parentCollection) : null, name = String(c.name || c.key);
+        if (c.parentCollection && !parent)
+            return null;
+        let p = parent ? path(parent, seen) : "";
+        if (p === null)
+            return null;
+        let full = p ? `${p} / ${name}` : name;
+        out.set(c.key, full);
+        return full;
+    };
+    cols.forEach(c => path(c, new Set));
+    return out;
+}
+/** All collections ZotFlow knows, for the board settings picker. */
+async function KbZfListCollections() {
+    return KbZfWithDb(async (db) => {
+        let libs = await KbZfGetAll(db, "libraries"), out = [];
+        libs.sort((a, b) => (a.type === "user" ? 0 : 1) - (b.type === "user" ? 0 : 1) || String(a.name || "").localeCompare(String(b.name || "")));
+        for (let lib of libs) {
+            let cols = await KbZfGetAll(db, "collections", KbZfLibraryRange(lib.id)), paths = KbZfCollectionPaths(cols), libName = String(lib.name || (lib.type === "user" ? "My Library" : `Library ${lib.id}`)), rows = [];
+            paths.forEach((p, key) => rows.push({ value: `${lib.id}:${key}`, label: `${libName} › ${p}` }));
+            rows.sort((a, b) => a.label.localeCompare(b.label));
+            out.push(...rows);
+        }
+        return out;
+    });
+}
+function KbZfIsLinkableItem(item, libraryID) {
+    return !!item && item.libraryID === libraryID && !item.parentItem && !item.trashed && item.itemType !== "attachment" && item.itemType !== "note" && item.itemType !== "annotation";
+}
+/** The top-level items of a collection and its sub-collections, oldest first. */
+async function KbZfCollectionItems(cfg) {
+    return KbZfWithDb(async (db) => {
+        let cols = await KbZfGetAll(db, "collections", KbZfLibraryRange(cfg.libraryID)), paths = KbZfCollectionPaths(cols);
+        if (!paths.has(cfg.key))
+            return { missing: !0, items: [], keys: new Set };
+        let children = new Map;
+        cols.forEach(c => { if (c.trashed || !c.parentCollection)
+            return; let l = children.get(c.parentCollection) || []; l.push(c.key), children.set(c.parentCollection, l); });
+        let keys = new Set, walk = k => { if (keys.has(k))
+            return; keys.add(k), (children.get(k) || []).forEach(walk); };
+        walk(cfg.key);
+        let items = new Map;
+        for (let k of keys) {
+            let rows = await KbZfGetAll(db, "items", k, "collections");
+            rows.forEach(r => { KbZfIsLinkableItem(r, cfg.libraryID) && !items.has(r.key) && items.set(r.key, { key: r.key, title: String(r.title || ""), dateAdded: String(r.dateAdded || "") }); });
+        }
+        let list = Array.from(items.values()).sort((a, b) => a.dateAdded < b.dateAdded ? -1 : a.dateAdded > b.dateAdded ? 1 : 0);
+        return { missing: !1, items: list, keys };
+    });
+}
+/** Titles of single items (for drops of items that have no source note yet). */
+async function KbZfItemTitles(items) {
+    let res = await KbZfWithDb(async (db) => {
+        let out = new Map;
+        for (let it of items) {
+            try {
+                let tx = db.transaction("items", "readonly"), row = await KbZfRequest(tx.objectStore("items").get([it.libraryID, it.key]));
+                row && out.set(`${it.libraryID}:${it.key}`, String(row.title || ""));
+            }
+            catch (e) { }
+        }
+        return out;
+    });
+    return res || new Map;
+}
+/** Source notes by item: `${libraryID}:${key}`, or `*:${key}` when the note names no library. */
+function KbZfNoteIndex(app) {
+    let m = new Map;
+    for (let f of app.vault.getMarkdownFiles()) {
+        let c = app.metadataCache.getFileCache(f), fm = c && c.frontmatter, k = fm && fm["zotero-key"];
+        if (typeof k !== "string" || !k)
+            continue;
+        let lib = fm["library-id"], id = lib !== void 0 && lib !== null && lib !== "" && !isNaN(Number(lib)) ? `${Number(lib)}:${k}` : `*:${k}`;
+        m.has(id) || m.set(id, f);
+    }
+    return m;
+}
+function KbZfFindNote(index, libraryID, key) { return index.get(`${libraryID}:${key}`) || index.get(`*:${key}`) || null; }
+function KbZfEscapeLinkText(t) { return String(t || "").replace(/[\[\]]/g, m => "\\" + m).replace(/\s+/g, " ").trim(); }
+/** Fallback link for an item without a source note: ZotFlow creates the note when it is opened. */
+function KbZfProtocolLink(libraryID, key, title) {
+    return `[${KbZfEscapeLinkText(title) || key}](obsidian://zotflow?type=open-note&libraryID=${libraryID}&key=${encodeURIComponent(key)})`;
+}
+/** Item keys of source notes the board already links to (cards and archive). */
+function KbZfBoardKeys(stateManager, board) {
+    let app = stateManager.app, from = stateManager.file.path, keys = new Set, re = /\[\[([^\]|#^]+)[^\]]*\]\]|\]\(<([^>]+)>\)|\]\(([^)\s]+)\)/g, visit = item => {
+        let t = item && item.data && item.data.titleRaw || "";
+        for (let m of t.matchAll(re)) {
+            let lp = m[1] || m[2] || m[3] || "";
+            if (!m[1] && /^[a-z][a-z0-9+.-]*:/i.test(lp))
+                continue;
+            if (!m[1])
+                try {
+                    lp = decodeURI(lp);
+                }
+                catch (e) { }
+            lp = lp.replace(/#.*$/, "").trim();
+            if (!lp)
+                continue;
+            let f = app.metadataCache.getFirstLinkpathDest(lp, from), c = f && app.metadataCache.getFileCache(f), k = c && c.frontmatter && c.frontmatter["zotero-key"];
+            typeof k == "string" && k && keys.add(k);
+        }
+    };
+    (board.children || []).forEach(l => (l.children || []).forEach(visit)), ((board.data && board.data.archive) || []).forEach(visit);
+    return keys;
+}
+/** Links for a drop of items from ZotFlow's library browser, or null when the drop is not one. */
+async function KbZfDropLinks(stateManager, dataTransfer) {
+    let raw = "";
+    try {
+        raw = dataTransfer && typeof dataTransfer.getData == "function" ? dataTransfer.getData(KbZfLinksMime) : "";
+    }
+    catch (e) {
+        raw = "";
+    }
+    if (!raw)
+        return null;
+    let payload;
+    try {
+        payload = JSON.parse(raw);
+    }
+    catch (e) {
+        return null;
+    }
+    if (!payload || payload.type !== "zotflow-source-links" || !Array.isArray(payload.items))
+        return null;
+    let items = payload.items.filter(i => i && typeof i.libraryID == "number" && typeof i.key == "string" && i.key);
+    if (!items.length)
+        return null;
+    let app = stateManager.app, from = stateManager.file.path, index = KbZfNoteIndex(app), out = items.map(it => { let f = KbZfFindNote(index, it.libraryID, it.key); return f ? app.fileManager.generateMarkdownLink(f, from) : null; }), missing = items.filter((it, i) => !out[i]);
+    if (missing.length) {
+        let titles = await KbZfItemTitles(missing);
+        items.forEach((it, i) => { out[i] || (out[i] = KbZfProtocolLink(it.libraryID, it.key, titles.get(`${it.libraryID}:${it.key}`) || "")); });
+    }
+    return out;
+}
+/**
+ * The board with the new cards in its inbox list and the imported keys
+ * remembered; the same board when there is nothing to do.
+ */
+function KbZfApplyImport(stateManager, state, cfg, cards, markOnly) {
+    if (!state || !state.data)
+        return state;
+    let settings = state.data.settings || {};
+    if (String(settings[KbZfSettingCollection] || "").trim() !== KbZfCollectionValue(cfg))
+        return state;
+    let imported = Array.isArray(settings[KbZfSettingImported]) ? settings[KbZfSettingImported].slice() : [], have = new Set(imported), newCards = [], seen = new Set;
+    cards.forEach(c => { have.has(c.key) || seen.has(c.key) || (seen.add(c.key), newCards.push(c)); });
+    let marks = markOnly.filter(k => !have.has(k) && !seen.has(k));
+    if (!newCards.length && !marks.length)
+        return state;
+    let lanes = state.children.slice();
+    if (newCards.length) {
+        let inboxName = String(settings[KbZfSettingInbox] || "").trim() || KbZfDefaultInbox, wanted = inboxName.toLocaleLowerCase(), li = lanes.findIndex(l => String(l && l.data && l.data.title || "").trim().toLocaleLowerCase() === wanted);
+        if (li < 0)
+            lanes.unshift({ ...Ca, id: nt(), children: [], data: { title: inboxName, shouldMarkItemsComplete: !1 } }), li = 0;
+        let lane = lanes[li], swims = KbBoardSwimlanes(state), swim = swims.length ? swims[0] : null, method = stateManager.getSetting("new-card-insertion-method") || "append", prepend = method === "prepend" || method === "prepend-compact", made = newCards.map(c => { let it = stateManager.getNewItem(c.link, " "); return swim !== null && (it = { ...it, data: { ...it.data, swimlane: swim } }), it; });
+        prepend && made.reverse();
+        let children = lane.children.slice(), at = swim !== null ? KbSwimInsertIndex(lane, swim, swims, prepend) : prepend ? 0 : children.length;
+        children.splice(at, 0, ...made), lanes[li] = { ...lane, children };
+    }
+    newCards.forEach(c => imported.push(c.key)), marks.forEach(k => imported.push(k));
+    return { ...state, children: lanes, data: { ...state.data, settings: { ...settings, [KbZfSettingImported]: imported } } };
+}
+var KbZfInbox = class {
+    constructor(plugin) { this.plugin = plugin; this.app = plugin.app; this.timers = new Map; this.running = new Set; this.again = new Set; this.watched = new WeakMap; this.stopped = !1; }
+    start() {
+        this.plugin.registerEvent(this.app.workspace.on(KbZfChangedEvent, ch => this.onCollections(ch)));
+        this.plugin.registerEvent(this.app.metadataCache.on("changed", (f, d, c) => this.onMetadata(f, c)));
+        this.plugin.register(() => { this.stopped = !0, this.timers.forEach(t => window.clearTimeout(t)), this.timers.clear(), KbZfInboxInstance === this && (KbZfInboxInstance = null); });
+        KbZfInboxInstance = this;
+    }
+    info(sm) { let i = this.watched.get(sm); return i || (i = { sig: null, subtree: new Set, pending: new Set, missingNotified: !1 }, this.watched.set(sm, i)), i; }
+    config(sm) { let s = sm && sm.state && sm.state.data && sm.state.data.settings; return KbZfParseCollection(s && s[KbZfSettingCollection]); }
+    /** Called after every board state change: (re)reads when the board starts following a collection. */
+    stateChanged(sm) {
+        if (this.stopped || !sm || !sm.state || !sm.state.data)
+            return;
+        let s = sm.state.data.settings || {}, sig = `${String(s[KbZfSettingCollection] || "").trim()}|${String(s[KbZfSettingInbox] || "").trim()}`, i = this.info(sm);
+        if (i.sig === sig)
+            return;
+        i.sig = sig, i.subtree = new Set, i.pending = new Set, i.missingNotified = !1, KbZfParseCollection(s[KbZfSettingCollection]) && this.schedule(sm, 400);
+    }
+    onCollections(changes) {
+        if (this.stopped || !Array.isArray(changes))
+            return;
+        this.plugin.stateManagers.forEach(sm => {
+            let cfg = this.config(sm);
+            if (!cfg)
+                return;
+            let i = this.info(sm);
+            changes.some(c => c && c.libraryID === cfg.libraryID && (c.collectionChanged || (Array.isArray(c.added) && c.added.length && (c.collectionKey === cfg.key || i.subtree.has(c.collectionKey))))) && this.schedule(sm, 600);
+        });
+    }
+    onMetadata(file, cache) {
+        let k = cache && cache.frontmatter && cache.frontmatter["zotero-key"];
+        if (this.stopped || typeof k != "string" || !k)
+            return;
+        this.plugin.stateManagers.forEach(sm => { let i = this.watched.get(sm); i && i.pending.has(k) && this.schedule(sm, 500); });
+    }
+    schedule(sm, delay) {
+        if (this.stopped)
+            return;
+        let t = this.timers.get(sm);
+        t && window.clearTimeout(t), this.timers.set(sm, window.setTimeout(() => { this.timers.delete(sm), this.run(sm); }, delay));
+    }
+    async run(sm) {
+        if (this.running.has(sm)) {
+            this.again.add(sm);
+            return;
+        }
+        this.running.add(sm);
+        try {
+            await this.importInto(sm);
+        }
+        catch (e) {
+            console.error("[kanban-evo] ZotFlow inbox import failed", e);
+        }
+        finally {
+            this.running.delete(sm), this.again.delete(sm) && this.schedule(sm, 200);
+        }
+    }
+    isOpen(sm) { return !!sm && !!sm.file && this.plugin.stateManagers.get(sm.file) === sm && !!sm.state && !sm.hasError(); }
+    async importInto(sm) {
+        if (!this.isOpen(sm))
+            return;
+        let cfg = this.config(sm);
+        if (!cfg || !KbZfEnabled(this.app))
+            return;
+        let res = await KbZfCollectionItems(cfg);
+        if (!res || !this.isOpen(sm))
+            return;
+        let now = this.config(sm);
+        if (!now || KbZfCollectionValue(now) !== KbZfCollectionValue(cfg))
+            return;
+        let i = this.info(sm);
+        if (i.subtree = res.keys, res.missing) {
+            i.missingNotified || (i.missingNotified = !0, new KbZfObsidian.Notice(`Kanban: the ZotFlow collection of “${sm.file.basename}” was not found or is in the trash.`));
+            return;
+        }
+        i.missingNotified = !1;
+        let settings = sm.state.data.settings || {}, imported = new Set(Array.isArray(settings[KbZfSettingImported]) ? settings[KbZfSettingImported] : []), candidates = res.items.filter(it => !imported.has(it.key));
+        if (!candidates.length) {
+            i.pending = new Set;
+            return;
+        }
+        let onBoard = KbZfBoardKeys(sm, sm.state), index = KbZfNoteIndex(this.app), cards = [], marks = [], pending = new Set;
+        for (let it of candidates) {
+            if (onBoard.has(it.key)) {
+                marks.push(it.key);
+                continue;
+            }
+            let f = KbZfFindNote(index, cfg.libraryID, it.key);
+            f ? cards.push({ key: it.key, link: this.app.fileManager.generateMarkdownLink(f, sm.file.path) }) : pending.add(it.key);
+        }
+        if (i.pending = pending, !cards.length && !marks.length)
+            return;
+        let next = KbZfApplyImport(sm, sm.state, cfg, cards, marks);
+        next !== sm.state && sm.setState(next);
+    }
+};
+/** The board settings section: which collection the board follows and its inbox list. */
+function KbZfBoardSettings(settingsUI, containerEl) {
+    let [current] = settingsUI.getSetting(KbZfSettingCollection, !0), [inbox] = settingsUI.getSetting(KbZfSettingInbox, !0), app = settingsUI.app;
+    containerEl.createEl("h4", { text: "ZotFlow collection" });
+    let desc = "New items of this collection and its sub-collections are added to the inbox list as links to their source notes. A card you delete or archive does not come back; cards stay when an item leaves the collection.";
+    KbZfEnabled(app) || (desc += " ZotFlow Evo is not enabled, so nothing is imported now.");
+    new KbZfObsidian.Setting(containerEl).setName("Follow collection").setDesc(desc).addDropdown(dd => {
+        dd.addOption("", "None"), current && dd.addOption(String(current), "Loading…"), dd.setValue(String(current || "")), dd.onChange(v => { v ? settingsUI.applySettingsUpdate({ [KbZfSettingCollection]: { $set: v } }) : settingsUI.applySettingsUpdate({ $unset: [KbZfSettingCollection] }); });
+        KbZfListCollections().then(rows => {
+            let sel = dd.selectEl, value = dd.getValue();
+            for (; sel.options.length > 1;)
+                sel.remove(1);
+            if (!rows) {
+                dd.addOption("__none", "ZotFlow's database was not found"), sel.options[sel.options.length - 1].disabled = !0, value && (dd.addOption(value, "Current collection (not found)"), dd.setValue(value));
+                return;
+            }
+            rows.forEach(r => dd.addOption(r.value, r.label)), value && !rows.some(r => r.value === value) && dd.addOption(value, "Current collection (not found)"), dd.setValue(value);
+        }).catch(e => console.error("[kanban-evo] Listing ZotFlow collections failed", e));
+    });
+    new KbZfObsidian.Setting(containerEl).setName("Inbox list").setDesc(`The list new items go to; created at the start of the board if there is none. Default: ${KbZfDefaultInbox}.`).addText(t => {
+        t.setPlaceholder(KbZfDefaultInbox), t.setValue(inbox ? String(inbox) : ""), t.onChange(v => { v = v.trim(), v ? settingsUI.applySettingsUpdate({ [KbZfSettingInbox]: { $set: v } }) : settingsUI.applySettingsUpdate({ $unset: [KbZfSettingInbox] }); });
+    });
+}
 function KbDropCardIntoMarkdown(e, t) {
     try {
         if (!e || !t || typeof t.getData !== "function")
@@ -7490,7 +7887,8 @@ function lR({ win: e, plugin: t }) { let r = t.useKanbanViews(e), n = r.map(a =>
                 return E.getNewItem(pe, De);
             }
         } return (0, _s.default)(V, { data: { checked: { $set: !!((Q = F == null ? void 0 : F.data) != null && Q.shouldMarkItemsComplete) }, checkChar: { $set: (oe = F == null ? void 0 : F.data) != null && oe.shouldMarkItemsComplete ? Xn() : " " } } }); });
-        return E.setState(L => ri(L, x, T));
+        let KbTarget = o && typeof o.getData == "function" ? o.getData() : null;
+        return E.setState(L => { let KbPath = x, KbSw = KbTarget && KbTarget.kbSwimlane !== void 0 ? String(KbTarget.kbSwimlane) : null, KbSws = KbBoardSwimlanes(L); if (KbTarget && KbTarget.kbEndOfSwimlane && KbSw !== null && typeof KbTarget.kbLaneIndex == "number" && L.children[KbTarget.kbLaneIndex]) KbPath = [KbTarget.kbLaneIndex, KbSwimInsertIndex(L.children[KbTarget.kbLaneIndex], KbSw, KbSws, !1)]; let KbItems = T; if (KbSws.length) { let KbUse = KbSw !== null && KbSws.includes(KbSw) ? KbSw : KbSws[0]; KbItems = T.map(KbIt => ({ ...KbIt, data: { ...KbIt.data, swimlane: KbUse } })); } return ri(L, KbPath, KbItems); });
     }
     catch (T) {
         E.setError(T), console.error(T);
@@ -7654,12 +8052,12 @@ function zR(e) { let [t, r] = Le(e.tags), [n, i] = Le(""), { getShouldIMEBlockAc
                     } }, ...o }), S("button", { onClick: () => { c(), i(""); }, children: N("Add tag") })] })] }); }
 function Gx(e, t, r, n) { ei(S(zR, { tags: r, scrollEl: t, onChange: n, portalContainer: pa(e) }), e); }
 function Jx(e) { ti(e); }
-var Zx = /^\d+(?:\.\d+)?$/, Xx = new Set([_t, "append-archive-date", "archive-date-format", "archive-date-separator", "archive-with-date", "categories", "category-trigger", "date-colors", "date-display-format", "date-format", "date-picker-week-start", "date-time-display-format", "date-trigger", "full-list-lane-width", "hide-card-count", "inline-metadata-position", "lane-width", "link-date-to-daily-note", "list-collapse", "max-archive-size", "metadata-keys", "move-dates", "move-tags", "move-task-metadata", "new-card-insertion-method", "new-line-trigger", "new-note-folder", "new-note-template", "priority-trigger", "show-card-date", "show-card-priority", "show-card-categories", "show-card-story-points", "show-card-assignment", "members", "show-add-list", "show-archive-all", "show-board-settings", "show-checkboxes", "show-relative-date", "show-search", "show-set-view", "show-view-as-markdown", "story-points-trigger", "table-sizing", "tag-action", "tag-colors", "tag-sort", "time-format", "time-trigger"]), Vd = class {
+var Zx = /^\d+(?:\.\d+)?$/, Xx = new Set([_t, "append-archive-date", "archive-date-format", "archive-date-separator", "archive-with-date", "categories", "category-trigger", "date-colors", "date-display-format", "date-format", "date-picker-week-start", "date-time-display-format", "date-trigger", "full-list-lane-width", "hide-card-count", "inline-metadata-position", "lane-width", "link-date-to-daily-note", "list-collapse", "max-archive-size", "metadata-keys", "move-dates", "move-tags", "move-task-metadata", "new-card-insertion-method", "new-line-trigger", "new-note-folder", "new-note-template", "priority-trigger", "show-card-date", "show-card-priority", "show-card-categories", "show-card-story-points", "show-card-assignment", "members", "zotflow-collection", "zotflow-inbox", "zotflow-imported", "show-add-list", "show-archive-all", "show-board-settings", "show-checkboxes", "show-relative-date", "show-search", "show-set-view", "show-view-as-markdown", "story-points-trigger", "table-sizing", "tag-action", "tag-colors", "tag-sort", "time-format", "time-trigger"]), Vd = class {
     constructor(t, r, n) { this.cleanupFns = []; this.applyDebounceTimer = 0; this.app = t.app, this.plugin = t, this.config = r, this.settings = n; }
     applySettingsUpdate(t) { this.win.clearTimeout(this.applyDebounceTimer), this.applyDebounceTimer = this.win.setTimeout(() => { this.settings = (0, Qx.default)(this.settings, t), this.config.onSettingsChange(this.settings); }, 1e3); }
     getSetting(t, r) { return r ? [this.settings[t], this.plugin.settings[t]] : [this.settings[t], null]; }
     constructUI(t, r, n) { this.win = t.win; let { templateFiles: i, vaultFolders: a, templateWarning: o } = Sx(this.app); t.createEl("h3", { text: r }), n ? t.createEl("p", { text: N("These settings will take precedence over the default Kanban board settings.") }) : t.createEl("p", { text: N("Set the default Kanban board settings. Settings can be overridden on a board-by-board basis.") }), t.createEl("h4", { text: "Card header" }), [["show-card-date", "Date", !0], ["show-card-priority", "Priority", !0], ["show-card-categories", "Categories", !1], ["show-card-story-points", "Story points", !1], ["show-card-assignment", "Assign", !1]].forEach(([s, u, l]) => { new rt.Setting(t).setName(u).setDesc(`Show the ${u.toLowerCase()} picker in the card header.`).then(c => { let d; c.addToggle(m => { d = m; let [h, g] = this.getSetting(s, n); m.setValue(h !== void 0 ? h : g !== void 0 ? g : l), m.onChange(v => { this.applySettingsUpdate({ [s]: { $set: v } }); }); }), n && c.addExtraButton(m => { m.setIcon("lucide-rotate-ccw").setTooltip(N("Reset to default")).onClick(() => { let [, h] = this.getSetting(s, n); d.setValue(h !== void 0 ? h : l), this.applySettingsUpdate({ $unset: [s] }); }); }); }); }), n && new rt.Setting(t).setName("Members").setDesc("One member per line. These names are offered by the Assign picker on this board.").addTextArea(s => { let [u] = this.getSetting("members", n), l = Array.isArray(u) ? u : []; s.setValue(l.join("\n")), s.setPlaceholder("Ada Lovelace\nAlan Turing"), s.onChange(c => { let d = c.split(/\r?\n/).map(m => m.trim()).filter(Boolean), h = []; for (let m of d)
-        h.includes(m) || h.push(m); this.applySettingsUpdate({ members: { $set: h } }); }); }), new rt.Setting(t).setName(N("Display card checkbox")).setDesc(N("When toggled, a checkbox will be displayed with each card")).then(s => { let u; s.addToggle(l => { u = l; let [c, d] = this.getSetting("show-checkboxes", n); c !== void 0 ? l.setValue(c) : d !== void 0 && l.setValue(d), l.onChange(m => { this.applySettingsUpdate({ "show-checkboxes": { $set: m } }); }); }).addExtraButton(l => { l.setIcon("lucide-rotate-ccw").setTooltip(N("Reset to default")).onClick(() => { let [, c] = this.getSetting("show-checkboxes", n); u.setValue(!!c), this.applySettingsUpdate({ $unset: ["show-checkboxes"] }); }); }); }), new rt.Setting(t).setName(N("New line trigger")).setDesc(N("Select whether Enter or Shift+Enter creates a new line. The opposite of what you choose will create and complete editing of cards and lists.")).addDropdown(s => { s.addOption("shift-enter", N("Shift + Enter")), s.addOption("enter", N("Enter")); let [u, l] = this.getSetting("new-line-trigger", n); s.setValue(u || l || "shift-enter"), s.onChange(c => { this.applySettingsUpdate({ "new-line-trigger": { $set: c } }); }); }), new rt.Setting(t).setName(N("Prepend / append new cards")).setDesc(N("This setting controls whether new cards are added to the beginning or end of the list.")).addDropdown(s => { s.addOption("prepend", N("Prepend")), s.addOption("prepend-compact", N("Prepend (compact)")), s.addOption("append", N("Append")); let [u, l] = this.getSetting("new-card-insertion-method", n); s.setValue(u || l || "append"), s.onChange(c => { this.applySettingsUpdate({ "new-card-insertion-method": { $set: c } }); }); }), new rt.Setting(t).setName(N("Hide card counts in list titles")).setDesc(N("When toggled, card counts are hidden from the list title")).then(s => { let u; s.addToggle(l => { u = l; let [c, d] = this.getSetting("hide-card-count", n); c !== void 0 ? l.setValue(c) : d !== void 0 && l.setValue(d), l.onChange(m => { this.applySettingsUpdate({ "hide-card-count": { $set: m } }); }); }).addExtraButton(l => { l.setIcon("lucide-rotate-ccw").setTooltip(N("Reset to default")).onClick(() => { let [, c] = this.getSetting("hide-card-count", n); u.setValue(!!c), this.applySettingsUpdate({ $unset: ["hide-card-count"] }); }); }); }), new rt.Setting(t).setName(N("List width")).setDesc(N("Enter a number to set the list width in pixels.")).addText(s => { let [u, l] = this.getSetting("lane-width", n); s.inputEl.setAttr("type", "number"), s.inputEl.placeholder = `${l || "272"} (default)`, s.inputEl.value = u ? u.toString() : "", s.onChange(c => { if (c && Zx.test(c)) {
+        h.includes(m) || h.push(m); this.applySettingsUpdate({ members: { $set: h } }); }); }), n && KbZfBoardSettings(this, t), new rt.Setting(t).setName(N("Display card checkbox")).setDesc(N("When toggled, a checkbox will be displayed with each card")).then(s => { let u; s.addToggle(l => { u = l; let [c, d] = this.getSetting("show-checkboxes", n); c !== void 0 ? l.setValue(c) : d !== void 0 && l.setValue(d), l.onChange(m => { this.applySettingsUpdate({ "show-checkboxes": { $set: m } }); }); }).addExtraButton(l => { l.setIcon("lucide-rotate-ccw").setTooltip(N("Reset to default")).onClick(() => { let [, c] = this.getSetting("show-checkboxes", n); u.setValue(!!c), this.applySettingsUpdate({ $unset: ["show-checkboxes"] }); }); }); }), new rt.Setting(t).setName(N("New line trigger")).setDesc(N("Select whether Enter or Shift+Enter creates a new line. The opposite of what you choose will create and complete editing of cards and lists.")).addDropdown(s => { s.addOption("shift-enter", N("Shift + Enter")), s.addOption("enter", N("Enter")); let [u, l] = this.getSetting("new-line-trigger", n); s.setValue(u || l || "shift-enter"), s.onChange(c => { this.applySettingsUpdate({ "new-line-trigger": { $set: c } }); }); }), new rt.Setting(t).setName(N("Prepend / append new cards")).setDesc(N("This setting controls whether new cards are added to the beginning or end of the list.")).addDropdown(s => { s.addOption("prepend", N("Prepend")), s.addOption("prepend-compact", N("Prepend (compact)")), s.addOption("append", N("Append")); let [u, l] = this.getSetting("new-card-insertion-method", n); s.setValue(u || l || "append"), s.onChange(c => { this.applySettingsUpdate({ "new-card-insertion-method": { $set: c } }); }); }), new rt.Setting(t).setName(N("Hide card counts in list titles")).setDesc(N("When toggled, card counts are hidden from the list title")).then(s => { let u; s.addToggle(l => { u = l; let [c, d] = this.getSetting("hide-card-count", n); c !== void 0 ? l.setValue(c) : d !== void 0 && l.setValue(d), l.onChange(m => { this.applySettingsUpdate({ "hide-card-count": { $set: m } }); }); }).addExtraButton(l => { l.setIcon("lucide-rotate-ccw").setTooltip(N("Reset to default")).onClick(() => { let [, c] = this.getSetting("hide-card-count", n); u.setValue(!!c), this.applySettingsUpdate({ $unset: ["hide-card-count"] }); }); }); }), new rt.Setting(t).setName(N("List width")).setDesc(N("Enter a number to set the list width in pixels.")).addText(s => { let [u, l] = this.getSetting("lane-width", n); s.inputEl.setAttr("type", "number"), s.inputEl.placeholder = `${l || "272"} (default)`, s.inputEl.value = u ? u.toString() : "", s.onChange(c => { if (c && Zx.test(c)) {
         s.inputEl.removeClass("error"), this.applySettingsUpdate({ "lane-width": { $set: parseInt(c) } });
         return;
     } c && s.inputEl.addClass("error"), this.applySettingsUpdate({ $unset: ["lane-width"] }); }); }), new rt.Setting(t).setName(N("Expand lists to full width in list view")).then(s => { let u; s.addToggle(l => { u = l; let [c, d] = this.getSetting("full-list-lane-width", n); c !== void 0 ? l.setValue(c) : d !== void 0 && l.setValue(d), l.onChange(m => { this.applySettingsUpdate({ "full-list-lane-width": { $set: m } }); }); }).addExtraButton(l => { l.setIcon("lucide-rotate-ccw").setTooltip(N("Reset to default")).onClick(() => { let [, c] = this.getSetting("full-list-lane-width", n); u.setValue(!!c), this.applySettingsUpdate({ $unset: ["full-list-lane-width"] }); }); }); }), new rt.Setting(t).setName(N("Maximum number of archived cards")).setDesc(N("Archived cards can be viewed in markdown mode. This setting will begin removing old cards once the limit is reached. Setting this value to -1 will allow a board's archive to grow infinitely.")).addText(s => { let [u, l] = this.getSetting("max-archive-size", n); s.inputEl.setAttr("type", "number"), s.inputEl.placeholder = `${l || "-1"} (default)`, s.inputEl.value = u ? u.toString() : "", s.onChange(c => { if (c && Zx.test(c)) {
@@ -8212,7 +8610,7 @@ var Jr = "kanban", yo = "lucide-trello", gn = class extends ea.TextFileView {
     getViewState(r) { var a; let i = this.plugin.stateManagers.get(this.file).getSetting(r); return (a = this.viewSettings[r]) != null ? a : i; }
     useViewState(r) { var a; let i = this.plugin.stateManagers.get(this.file).useSetting(r); return (a = this.viewSettings[r]) != null ? a : i; }
     getPortal() { let r = this.plugin.stateManagers.get(this.file); return S(HC, { stateManager: r, view: this }); }
-    getBoardSettings() { let r = this.plugin.stateManagers.get(this.file), n = r.state; new $d(this, { onSettingsChange: i => { let a = (0, BC.default)(n, { data: { settings: { $set: i } } }); r.setState(a); } }, n.data.settings).open(); }
+    getBoardSettings() { let r = this.plugin.stateManagers.get(this.file), n = r.state; new $d(this, { onSettingsChange: i => { r.setState(KbLatest => { let KbS = KbLatest && KbLatest.data && KbLatest.data.settings || {}, KbNext = { ...i }; KbS["zotflow-imported"] !== void 0 ? KbNext["zotflow-imported"] = KbS["zotflow-imported"] : delete KbNext["zotflow-imported"]; return (0, BC.default)(KbLatest, { data: { settings: { $set: KbNext } } }); }); } }, n.data.settings).open(); }
     onPaneMenu(r, n, i = !0) { if (n !== "more-options") {
         super.onPaneMenu(r, n);
         return;
@@ -9152,7 +9550,7 @@ var wf = class {
         } }
     setState(t, r = !0) { var n; try {
         let i = (n = this.state) == null ? void 0 : n.data.settings, a = typeof t == "function" ? t(this.state) : t, o = a == null ? void 0 : a.data.settings, s = this.state;
-        r && !this.kbHistoryApplying && s && a !== s && (this.kbHistoryCloseTyping(), this.kbHistoryPush(s)), i && o && Fk(i, o) ? (this.state = (0, Bs.default)(this.state, { data: { settings: { $set: o } } }), this.compileSettings(), this.state = this.parser.reparseBoard()) : (this.state = a, this.compileSettings()), this.viewSet.forEach(u => { u.initHeaderButtons(), u.validatePreviewCache(a); }), r && this.saveToDisk(), this.stateReceivers.forEach(u => u(this.state)), i !== o && o && this.settingsNotifiers.forEach((u, l) => { (!i && o || i[l] !== o[l]) && u.forEach(c => c()); });
+        r && !this.kbHistoryApplying && s && a !== s && (this.kbHistoryCloseTyping(), this.kbHistoryPush(s)), i && o && Fk(i, o) ? (this.state = (0, Bs.default)(this.state, { data: { settings: { $set: o } } }), this.compileSettings(), this.state = this.parser.reparseBoard()) : (this.state = a, this.compileSettings()), this.viewSet.forEach(u => { u.initHeaderButtons(), u.validatePreviewCache(a); }), r && this.saveToDisk(), this.stateReceivers.forEach(u => u(this.state)), i !== o && o && this.settingsNotifiers.forEach((u, l) => { (!i && o || i[l] !== o[l]) && u.forEach(c => c()); }); try { KbZfInboxInstance && KbZfInboxInstance.stateChanged(this); } catch (KbE) { console.error("[kanban-evo] ZotFlow inbox", KbE); }
     }
     catch (i) {
         console.error(i), this.setError(i);
@@ -9196,7 +9594,7 @@ var bf = class extends Hn.Plugin {
     }
     catch (i) {
         console.warn("[Kanban Live Cards] Relay text-view registration failed", i);
-    } }; KbRelayRegister(), this.registerEvent(this.app.workspace.on("system3-relay:api-ready", KbRelayRegister)), this.registerMonkeyPatches(), this.registerCommands(), this.registerEvents(), this.mount(window), (n = (r = this.app.workspace.floatingSplit) == null ? void 0 : r.children) == null || n.forEach(i => { this.mount(i.win); }), this.registerDomEvent(window, "keydown", this.handleShift), this.registerDomEvent(window, "keyup", this.handleShift), this.addRibbonIcon(yo, N("Create new board"), () => { this.newKanban(); }); }
+    } }; KbRelayRegister(), this.registerEvent(this.app.workspace.on("system3-relay:api-ready", KbRelayRegister)), this.registerMonkeyPatches(), this.registerCommands(), this.registerEvents(), (this.kbZfInbox = new KbZfInbox(this)).start(), this.mount(window), (n = (r = this.app.workspace.floatingSplit) == null ? void 0 : r.children) == null || n.forEach(i => { this.mount(i.win); }), this.registerDomEvent(window, "keydown", this.handleShift), this.registerDomEvent(window, "keyup", this.handleShift), this.addRibbonIcon(yo, N("Create new board"), () => { this.newKanban(); }); }
     getKanbanViews(r) { let n = this.windowRegistry.get(r); return n ? Array.from(n.viewMap.values()) : []; }
     getKanbanView(r, n) { let i = this.windowRegistry.get(n); if (i != null && i.viewMap.has(r))
         return i.viewMap.get(r); for (let a of this.windowRegistry.values())

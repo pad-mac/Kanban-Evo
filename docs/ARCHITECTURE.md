@@ -18,6 +18,7 @@ Search `src/main.js` for these strings/symbol names to locate major systems:
 - `+ Add card` — swimlane grid add-card UI
 - `Due before` — search date filtering
 - `MarkdownEditor` — embedded Live Preview editor integration
+- `KbZf` — ZotFlow Evo integration (drops from the library browser, per-board collection inbox)
 
 ## Why this is not yet TypeScript modules
 

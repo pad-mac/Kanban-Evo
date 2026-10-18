@@ -14,7 +14,8 @@
 4. **Relay collaboration must not overwrite newer local editor content with stale echoes.** Preserve the existing echo/revision protections.
 5. **Swimlane Markdown contract:** H2 (`##`) headings are columns; H3 (`###`) headings are swimlanes repeated under columns.
 6. **Outside an active Kanban board, the plugin must have no behavioral effect on normal Markdown editing.**
-7. Prefer conservative changes. This snapshot grew through many incremental fixes; regression safety is more important than architectural elegance during feature work.
+7. **ZotFlow's database is read-only for this plugin.** `KbZf*` code opens the IndexedDB database `zotflow-dev` without a version, never creates it, closes every connection after reading and on `versionchange`, and never writes to it. Collection inboxes only add cards; they never remove or edit existing ones.
+8. Prefer conservative changes. This snapshot grew through many incremental fixes; regression safety is more important than architectural elegance during feature work.
 
 ## Current metadata contract
 
@@ -55,6 +56,10 @@ Canonical Markdown shape:
 ```
 
 Swimlane operations must preserve card identity, live editors, global undo/redo, and Relay state.
+
+## ZotFlow collection inbox
+
+Board settings keys: `zotflow-collection` (`libraryID:collectionKey`), `zotflow-inbox` (list title, default `Inbox`), `zotflow-imported` (item keys already imported; a deleted card's item is not re-added). Sub-collections are included. Triggers: board open or setting change, the workspace event `zotflow-evo:collections-changed` from ZotFlow Evo, and the metadata of a source note appearing (`zotero-key` / `library-id` frontmatter) for an item that had none yet. Cards are `- [ ] [[source note]]` links in the vault's link format; on swimlane boards they go to the first swimlane.
 
 ## Verification after changes
 
