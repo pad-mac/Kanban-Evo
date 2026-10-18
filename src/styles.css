@@ -1,0 +1,1695 @@
+.choices{position:relative;margin-bottom:24px;font-size:16px}.choices:focus{outline:none}.choices:last-child{margin-bottom:0}.choices.is-disabled .choices__inner,.choices.is-disabled .choices__input{background-color:#eaeaea;cursor:not-allowed;-webkit-user-select:none;-ms-user-select:none;user-select:none}.choices.is-disabled .choices__item{cursor:not-allowed}.choices [hidden]{display:none!important}.choices[data-type*=select-one]{cursor:pointer}.choices[data-type*=select-one] .choices__inner{padding-bottom:7.5px}.choices[data-type*=select-one] .choices__input{display:block;width:100%;padding:10px;border-bottom:1px solid #dddddd;background-color:#fff;margin:0}.choices[data-type*=select-one] .choices__button{background-image:url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEiIGhlaWdodD0iMjEiIHZpZXdCb3g9IjAgMCAyMSAyMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0yLjU5Mi4wNDRsMTguMzY0IDE4LjM2NC0yLjU0OCAyLjU0OEwuMDQ0IDIuNTkyeiIvPjxwYXRoIGQ9Ik0wIDE4LjM2NEwxOC4zNjQgMGwyLjU0OCAyLjU0OEwyLjU0OCAyMC45MTJ6Ii8+PC9nPjwvc3ZnPg==);padding:0;background-size:8px;position:absolute;top:50%;right:0;margin-top:-10px;margin-right:25px;height:20px;width:20px;border-radius:10em;opacity:.5}.choices[data-type*=select-one] .choices__button:hover,.choices[data-type*=select-one] .choices__button:focus{opacity:1}.choices[data-type*=select-one] .choices__button:focus{box-shadow:0 0 0 2px #00bcd4}.choices[data-type*=select-one] .choices__item[data-value=""] .choices__button{display:none}.choices[data-type*=select-one]:after{content:"";height:0;width:0;border-style:solid;border-color:#333333 transparent transparent transparent;border-width:5px;position:absolute;right:11.5px;top:50%;margin-top:-2.5px;pointer-events:none}.choices[data-type*=select-one].is-open:after{border-color:transparent transparent #333333 transparent;margin-top:-7.5px}.choices[data-type*=select-one][dir=rtl]:after{left:11.5px;right:auto}.choices[data-type*=select-one][dir=rtl] .choices__button{right:auto;left:0;margin-left:25px;margin-right:0}.choices[data-type*=select-multiple] .choices__inner,.choices[data-type*=text] .choices__inner{cursor:text}.choices[data-type*=select-multiple] .choices__button,.choices[data-type*=text] .choices__button{position:relative;display:inline-block;margin:0 -4px 0 8px;padding-left:16px;border-left:1px solid #008fa1;background-image:url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEiIGhlaWdodD0iMjEiIHZpZXdCb3g9IjAgMCAyMSAyMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjRkZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0yLjU5Mi4wNDRsMTguMzY0IDE4LjM2NC0yLjU0OCAyLjU0OEwuMDQ0IDIuNTkyeiIvPjxwYXRoIGQ9Ik0wIDE4LjM2NEwxOC4zNjQgMGwyLjU0OCAyLjU0OEwyLjU0OCAyMC45MTJ6Ii8+PC9nPjwvc3ZnPg==);background-size:8px;width:8px;line-height:1;opacity:.75;border-radius:0}.choices[data-type*=select-multiple] .choices__button:hover,.choices[data-type*=select-multiple] .choices__button:focus,.choices[data-type*=text] .choices__button:hover,.choices[data-type*=text] .choices__button:focus{opacity:1}.choices__inner{display:inline-block;vertical-align:top;width:100%;background-color:#f9f9f9;padding:7.5px 7.5px 3.75px;border:1px solid #dddddd;border-radius:2.5px;font-size:14px;min-height:44px;overflow:hidden}.is-focused .choices__inner,.is-open .choices__inner{border-color:#b7b7b7}.is-open .choices__inner{border-radius:2.5px 2.5px 0 0}.is-flipped.is-open .choices__inner{border-radius:0 0 2.5px 2.5px}.choices__list{margin:0;padding-left:0;list-style:none}.choices__list--single{display:inline-block;padding:4px 16px 4px 4px;width:100%}[dir=rtl] .choices__list--single{padding-right:4px;padding-left:16px}.choices__list--single .choices__item{width:100%}.choices__list--multiple{display:inline}.choices__list--multiple .choices__item{display:inline-block;vertical-align:middle;border-radius:20px;padding:4px 10px;font-size:12px;font-weight:500;margin-right:3.75px;margin-bottom:3.75px;background-color:#00bcd4;border:1px solid #00a5bb;color:#fff;word-break:break-all;box-sizing:border-box}.choices__list--multiple .choices__item[data-deletable]{padding-right:5px}[dir=rtl] .choices__list--multiple .choices__item{margin-right:0;margin-left:3.75px}.choices__list--multiple .choices__item.is-highlighted{background-color:#00a5bb;border:1px solid #008fa1}.is-disabled .choices__list--multiple .choices__item{background-color:#aaa;border:1px solid #919191}.choices__list--dropdown{visibility:hidden;z-index:1;position:absolute;width:100%;background-color:#fff;border:1px solid #dddddd;top:100%;margin-top:-1px;border-bottom-left-radius:2.5px;border-bottom-right-radius:2.5px;overflow:hidden;word-break:break-all;will-change:visibility}.choices__list--dropdown.is-active{visibility:visible}.is-open .choices__list--dropdown{border-color:#b7b7b7}.is-flipped .choices__list--dropdown{top:auto;bottom:100%;margin-top:0;margin-bottom:-1px;border-radius:.25rem .25rem 0 0}.choices__list--dropdown .choices__list{position:relative;max-height:300px;overflow:auto;-webkit-overflow-scrolling:touch;will-change:scroll-position}.choices__list--dropdown .choices__item{position:relative;padding:10px;font-size:14px}[dir=rtl] .choices__list--dropdown .choices__item{text-align:right}@media (min-width: 640px){.choices__list--dropdown .choices__item--selectable{padding-right:100px}.choices__list--dropdown .choices__item--selectable:after{content:attr(data-select-text);font-size:12px;opacity:0;position:absolute;right:10px;top:50%;transform:translateY(-50%)}[dir=rtl] .choices__list--dropdown .choices__item--selectable{text-align:right;padding-left:100px;padding-right:10px}[dir=rtl] .choices__list--dropdown .choices__item--selectable:after{right:auto;left:10px}}.choices__list--dropdown .choices__item--selectable.is-highlighted{background-color:#f2f2f2}.choices__list--dropdown .choices__item--selectable.is-highlighted:after{opacity:.5}.choices__item{cursor:default}.choices__item--selectable{cursor:pointer}.choices__item--disabled{cursor:not-allowed;-webkit-user-select:none;-ms-user-select:none;user-select:none;opacity:.5}.choices__heading{font-weight:600;font-size:12px;padding:10px;border-bottom:1px solid #f7f7f7;color:gray}.choices__button{text-indent:-9999px;-webkit-appearance:none;-moz-appearance:none;appearance:none;border:0;background-color:transparent;background-repeat:no-repeat;background-position:center;cursor:pointer}.choices__button:focus{outline:none}.choices__input{display:inline-block;vertical-align:baseline;background-color:#f9f9f9;font-size:14px;margin-bottom:5px;border:0;border-radius:0;max-width:100%;padding:4px 0 4px 2px}.choices__input:focus{outline:0}[dir=rtl] .choices__input{padding-right:2px;padding-left:0}.choices__placeholder{opacity:.5}.flatpickr-calendar{background:transparent;opacity:0;display:none;text-align:center;visibility:hidden;padding:0;-webkit-animation:none;animation:none;direction:ltr;border:0;font-size:14px;line-height:24px;border-radius:5px;position:absolute;width:307.875px;-webkit-box-sizing:border-box;box-sizing:border-box;-ms-touch-action:manipulation;touch-action:manipulation;background:#fff;-webkit-box-shadow:1px 0 0 #e6e6e6,-1px 0 0 #e6e6e6,0 1px 0 #e6e6e6,0 -1px 0 #e6e6e6,0 3px 13px rgba(0,0,0,.08);box-shadow:1px 0 #e6e6e6,-1px 0 #e6e6e6,0 1px #e6e6e6,0 -1px #e6e6e6,0 3px 13px #00000014}.flatpickr-calendar.open,.flatpickr-calendar.inline{opacity:1;max-height:640px;visibility:visible}.flatpickr-calendar.open{display:inline-block;z-index:99999}.flatpickr-calendar.animate.open{-webkit-animation:fpFadeInDown .3s cubic-bezier(.23,1,.32,1);animation:fpFadeInDown .3s cubic-bezier(.23,1,.32,1)}.flatpickr-calendar.inline{display:block;position:relative;top:2px}.flatpickr-calendar.static{position:absolute;top:calc(100% + 2px)}.flatpickr-calendar.static.open{z-index:999;display:block}.flatpickr-calendar.multiMonth .flatpickr-days .dayContainer:nth-child(n+1) .flatpickr-day.inRange:nth-child(7n+7){-webkit-box-shadow:none!important;box-shadow:none!important}.flatpickr-calendar.multiMonth .flatpickr-days .dayContainer:nth-child(n+2) .flatpickr-day.inRange:nth-child(7n+1){-webkit-box-shadow:-2px 0 0 #e6e6e6,5px 0 0 #e6e6e6;box-shadow:-2px 0 #e6e6e6,5px 0 #e6e6e6}.flatpickr-calendar .hasWeeks .dayContainer,.flatpickr-calendar .hasTime .dayContainer{border-bottom:0;border-bottom-right-radius:0;border-bottom-left-radius:0}.flatpickr-calendar .hasWeeks .dayContainer{border-left:0}.flatpickr-calendar.hasTime .flatpickr-time{height:40px;border-top:1px solid #e6e6e6}.flatpickr-calendar.noCalendar.hasTime .flatpickr-time{height:auto}.flatpickr-calendar:before,.flatpickr-calendar:after{position:absolute;display:block;pointer-events:none;border:solid transparent;content:"";height:0;width:0;left:22px}.flatpickr-calendar.rightMost:before,.flatpickr-calendar.arrowRight:before,.flatpickr-calendar.rightMost:after,.flatpickr-calendar.arrowRight:after{left:auto;right:22px}.flatpickr-calendar.arrowCenter:before,.flatpickr-calendar.arrowCenter:after{left:50%;right:50%}.flatpickr-calendar:before{border-width:5px;margin:0 -5px}.flatpickr-calendar:after{border-width:4px;margin:0 -4px}.flatpickr-calendar.arrowTop:before,.flatpickr-calendar.arrowTop:after{bottom:100%}.flatpickr-calendar.arrowTop:before{border-bottom-color:#e6e6e6}.flatpickr-calendar.arrowTop:after{border-bottom-color:#fff}.flatpickr-calendar.arrowBottom:before,.flatpickr-calendar.arrowBottom:after{top:100%}.flatpickr-calendar.arrowBottom:before{border-top-color:#e6e6e6}.flatpickr-calendar.arrowBottom:after{border-top-color:#fff}.flatpickr-calendar:focus{outline:0}.flatpickr-wrapper{position:relative;display:inline-block}.flatpickr-months{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex}.flatpickr-months .flatpickr-month{background:transparent;color:#000000e6;fill:#000000e6;height:34px;line-height:1;text-align:center;position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;overflow:hidden;-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1}.flatpickr-months .flatpickr-prev-month,.flatpickr-months .flatpickr-next-month{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;text-decoration:none;cursor:pointer;position:absolute;top:0;height:34px;padding:10px;z-index:3;color:#000000e6;fill:#000000e6}.flatpickr-months .flatpickr-prev-month.flatpickr-disabled,.flatpickr-months .flatpickr-next-month.flatpickr-disabled{display:none}.flatpickr-months .flatpickr-prev-month i,.flatpickr-months .flatpickr-next-month i{position:relative}.flatpickr-months .flatpickr-prev-month.flatpickr-prev-month,.flatpickr-months .flatpickr-next-month.flatpickr-prev-month{left:0}.flatpickr-months .flatpickr-prev-month.flatpickr-next-month,.flatpickr-months .flatpickr-next-month.flatpickr-next-month{right:0}.flatpickr-months .flatpickr-prev-month:hover,.flatpickr-months .flatpickr-next-month:hover{color:#959ea9}.flatpickr-months .flatpickr-prev-month:hover svg,.flatpickr-months .flatpickr-next-month:hover svg{fill:#f64747}.flatpickr-months .flatpickr-prev-month svg,.flatpickr-months .flatpickr-next-month svg{width:14px;height:14px}.flatpickr-months .flatpickr-prev-month svg path,.flatpickr-months .flatpickr-next-month svg path{-webkit-transition:fill .1s;transition:fill .1s;fill:inherit}.numInputWrapper{position:relative;height:auto}.numInputWrapper input,.numInputWrapper span{display:inline-block}.numInputWrapper input{width:100%}.numInputWrapper input::-ms-clear{display:none}.numInputWrapper input::-webkit-outer-spin-button,.numInputWrapper input::-webkit-inner-spin-button{margin:0;-webkit-appearance:none}.numInputWrapper span{position:absolute;right:0;width:14px;padding:0 4px 0 2px;height:50%;line-height:50%;opacity:0;cursor:pointer;border:1px solid rgba(57,57,57,.15);-webkit-box-sizing:border-box;box-sizing:border-box}.numInputWrapper span:hover{background:#0000001a}.numInputWrapper span:active{background:#0003}.numInputWrapper span:after{display:block;content:"";position:absolute}.numInputWrapper span.arrowUp{top:0;border-bottom:0}.numInputWrapper span.arrowUp:after{border-left:4px solid transparent;border-right:4px solid transparent;border-bottom:4px solid rgba(57,57,57,.6);top:26%}.numInputWrapper span.arrowDown{top:50%}.numInputWrapper span.arrowDown:after{border-left:4px solid transparent;border-right:4px solid transparent;border-top:4px solid rgba(57,57,57,.6);top:40%}.numInputWrapper span svg{width:inherit;height:auto}.numInputWrapper span svg path{fill:#00000080}.numInputWrapper:hover{background:#0000000d}.numInputWrapper:hover span{opacity:1}.flatpickr-current-month{font-size:135%;line-height:inherit;font-weight:300;color:inherit;position:absolute;width:75%;left:12.5%;padding:7.48px 0 0;line-height:1;height:34px;display:inline-block;text-align:center;-webkit-transform:translate3d(0,0,0);transform:translateZ(0)}.flatpickr-current-month span.cur-month{font-family:inherit;font-weight:700;color:inherit;display:inline-block;margin-left:.5ch;padding:0}.flatpickr-current-month span.cur-month:hover{background:#0000000d}.flatpickr-current-month .numInputWrapper{width:6ch;width:7ch\fffd;display:inline-block}.flatpickr-current-month .numInputWrapper span.arrowUp:after{border-bottom-color:#000000e6}.flatpickr-current-month .numInputWrapper span.arrowDown:after{border-top-color:#000000e6}.flatpickr-current-month input.cur-year{background:transparent;-webkit-box-sizing:border-box;box-sizing:border-box;color:inherit;cursor:text;padding:0 0 0 .5ch;margin:0;display:inline-block;font-size:inherit;font-family:inherit;font-weight:300;line-height:inherit;height:auto;border:0;border-radius:0;vertical-align:initial;-webkit-appearance:textfield;-moz-appearance:textfield;appearance:textfield}.flatpickr-current-month input.cur-year:focus{outline:0}.flatpickr-current-month input.cur-year[disabled],.flatpickr-current-month input.cur-year[disabled]:hover{font-size:100%;color:#00000080;background:transparent;pointer-events:none}.flatpickr-current-month .flatpickr-monthDropdown-months{appearance:menulist;background:transparent;border:none;border-radius:0;box-sizing:border-box;color:inherit;cursor:pointer;font-size:inherit;font-family:inherit;font-weight:300;height:auto;line-height:inherit;margin:-1px 0 0;outline:none;padding:0 0 0 .5ch;position:relative;vertical-align:initial;-webkit-box-sizing:border-box;-webkit-appearance:menulist;-moz-appearance:menulist;width:auto}.flatpickr-current-month .flatpickr-monthDropdown-months:focus,.flatpickr-current-month .flatpickr-monthDropdown-months:active{outline:none}.flatpickr-current-month .flatpickr-monthDropdown-months:hover{background:#0000000d}.flatpickr-current-month .flatpickr-monthDropdown-months .flatpickr-monthDropdown-month{background-color:transparent;outline:none;padding:0}.flatpickr-weekdays{background:transparent;text-align:center;overflow:hidden;width:100%;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;height:28px}.flatpickr-weekdays .flatpickr-weekdaycontainer{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1}span.flatpickr-weekday{cursor:default;font-size:90%;background:transparent;color:#0000008a;line-height:1;margin:0;text-align:center;display:block;-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1;font-weight:bolder}.dayContainer,.flatpickr-weeks{padding:1px 0 0}.flatpickr-days{position:relative;overflow:hidden;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:start;-webkit-align-items:flex-start;-ms-flex-align:start;align-items:flex-start;width:307.875px}.flatpickr-days:focus{outline:0}.dayContainer{padding:0;outline:0;text-align:left;width:307.875px;min-width:307.875px;max-width:307.875px;-webkit-box-sizing:border-box;box-sizing:border-box;display:inline-block;display:-ms-flexbox;display:-webkit-box;display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;-ms-flex-wrap:wrap;-ms-flex-pack:justify;-webkit-justify-content:space-around;justify-content:space-around;-webkit-transform:translate3d(0,0,0);transform:translateZ(0);opacity:1}.dayContainer+.dayContainer{-webkit-box-shadow:-1px 0 0 #e6e6e6;box-shadow:-1px 0 #e6e6e6}.flatpickr-day{background:none;border:1px solid transparent;border-radius:150px;-webkit-box-sizing:border-box;box-sizing:border-box;color:#393939;cursor:pointer;font-weight:400;width:14.2857143%;-webkit-flex-basis:14.2857143%;-ms-flex-preferred-size:14.2857143%;flex-basis:14.2857143%;max-width:39px;height:39px;line-height:39px;margin:0;display:inline-block;position:relative;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;text-align:center}.flatpickr-day.inRange,.flatpickr-day.prevMonthDay.inRange,.flatpickr-day.nextMonthDay.inRange,.flatpickr-day.today.inRange,.flatpickr-day.prevMonthDay.today.inRange,.flatpickr-day.nextMonthDay.today.inRange,.flatpickr-day:hover,.flatpickr-day.prevMonthDay:hover,.flatpickr-day.nextMonthDay:hover,.flatpickr-day:focus,.flatpickr-day.prevMonthDay:focus,.flatpickr-day.nextMonthDay:focus{cursor:pointer;outline:0;background:#e6e6e6;border-color:#e6e6e6}.flatpickr-day.today{border-color:#959ea9}.flatpickr-day.today:hover,.flatpickr-day.today:focus{border-color:#959ea9;background:#959ea9;color:#fff}.flatpickr-day.selected,.flatpickr-day.startRange,.flatpickr-day.endRange,.flatpickr-day.selected.inRange,.flatpickr-day.startRange.inRange,.flatpickr-day.endRange.inRange,.flatpickr-day.selected:focus,.flatpickr-day.startRange:focus,.flatpickr-day.endRange:focus,.flatpickr-day.selected:hover,.flatpickr-day.startRange:hover,.flatpickr-day.endRange:hover,.flatpickr-day.selected.prevMonthDay,.flatpickr-day.startRange.prevMonthDay,.flatpickr-day.endRange.prevMonthDay,.flatpickr-day.selected.nextMonthDay,.flatpickr-day.startRange.nextMonthDay,.flatpickr-day.endRange.nextMonthDay{background:#569ff7;-webkit-box-shadow:none;box-shadow:none;color:#fff;border-color:#569ff7}.flatpickr-day.selected.startRange,.flatpickr-day.startRange.startRange,.flatpickr-day.endRange.startRange{border-radius:50px 0 0 50px}.flatpickr-day.selected.endRange,.flatpickr-day.startRange.endRange,.flatpickr-day.endRange.endRange{border-radius:0 50px 50px 0}.flatpickr-day.selected.startRange+.endRange:not(:nth-child(7n+1)),.flatpickr-day.startRange.startRange+.endRange:not(:nth-child(7n+1)),.flatpickr-day.endRange.startRange+.endRange:not(:nth-child(7n+1)){-webkit-box-shadow:-10px 0 0 #569ff7;box-shadow:-10px 0 #569ff7}.flatpickr-day.selected.startRange.endRange,.flatpickr-day.startRange.startRange.endRange,.flatpickr-day.endRange.startRange.endRange{border-radius:50px}.flatpickr-day.inRange{border-radius:0;-webkit-box-shadow:-5px 0 0 #e6e6e6,5px 0 0 #e6e6e6;box-shadow:-5px 0 #e6e6e6,5px 0 #e6e6e6}.flatpickr-day.flatpickr-disabled,.flatpickr-day.flatpickr-disabled:hover,.flatpickr-day.prevMonthDay,.flatpickr-day.nextMonthDay,.flatpickr-day.notAllowed,.flatpickr-day.notAllowed.prevMonthDay,.flatpickr-day.notAllowed.nextMonthDay{color:#3939394d;background:transparent;border-color:transparent;cursor:default}.flatpickr-day.flatpickr-disabled,.flatpickr-day.flatpickr-disabled:hover{cursor:not-allowed;color:#3939391a}.flatpickr-day.week.selected{border-radius:0;-webkit-box-shadow:-5px 0 0 #569ff7,5px 0 0 #569ff7;box-shadow:-5px 0 #569ff7,5px 0 #569ff7}.flatpickr-day.hidden{visibility:hidden}.rangeMode .flatpickr-day{margin-top:1px}.flatpickr-weekwrapper{float:left}.flatpickr-weekwrapper .flatpickr-weeks{padding:0 12px;-webkit-box-shadow:1px 0 0 #e6e6e6;box-shadow:1px 0 #e6e6e6}.flatpickr-weekwrapper .flatpickr-weekday{float:none;width:100%;line-height:28px}.flatpickr-weekwrapper span.flatpickr-day,.flatpickr-weekwrapper span.flatpickr-day:hover{display:block;width:100%;max-width:none;color:#3939394d;background:transparent;cursor:default;border:none}.flatpickr-innerContainer{display:block;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-sizing:border-box;box-sizing:border-box;overflow:hidden}.flatpickr-rContainer{display:inline-block;padding:0;-webkit-box-sizing:border-box;box-sizing:border-box}.flatpickr-time{text-align:center;outline:0;display:block;height:0;line-height:40px;max-height:40px;-webkit-box-sizing:border-box;box-sizing:border-box;overflow:hidden;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex}.flatpickr-time:after{content:"";display:table;clear:both}.flatpickr-time .numInputWrapper{-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1;width:40%;height:40px;float:left}.flatpickr-time .numInputWrapper span.arrowUp:after{border-bottom-color:#393939}.flatpickr-time .numInputWrapper span.arrowDown:after{border-top-color:#393939}.flatpickr-time.hasSeconds .numInputWrapper{width:26%}.flatpickr-time.time24hr .numInputWrapper{width:49%}.flatpickr-time input{background:transparent;-webkit-box-shadow:none;box-shadow:none;border:0;border-radius:0;text-align:center;margin:0;padding:0;height:inherit;line-height:inherit;color:#393939;font-size:14px;position:relative;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-appearance:textfield;-moz-appearance:textfield;appearance:textfield}.flatpickr-time input.flatpickr-hour{font-weight:700}.flatpickr-time input.flatpickr-minute,.flatpickr-time input.flatpickr-second{font-weight:400}.flatpickr-time input:focus{outline:0;border:0}.flatpickr-time .flatpickr-time-separator,.flatpickr-time .flatpickr-am-pm{height:inherit;float:left;line-height:inherit;color:#393939;font-weight:700;width:2%;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-align-self:center;-ms-flex-item-align:center;align-self:center}.flatpickr-time .flatpickr-am-pm{outline:0;width:18%;cursor:pointer;text-align:center;font-weight:400}.flatpickr-time input:hover,.flatpickr-time .flatpickr-am-pm:hover,.flatpickr-time input:focus,.flatpickr-time .flatpickr-am-pm:focus{background:#eee}.flatpickr-input[readonly]{cursor:pointer}@-webkit-keyframes fpFadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-20px,0);transform:translate3d(0,-20px,0)}to{opacity:1;-webkit-transform:translate3d(0,0,0);transform:translateZ(0)}}@keyframes fpFadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-20px,0);transform:translate3d(0,-20px,0)}to{opacity:1;-webkit-transform:translate3d(0,0,0);transform:translateZ(0)}}.workspace-leaf-content[data-type=kanban] .view-content{padding:0}.workspace-leaf-content[data-type=kanban]>.view-header{display:flex!important}.kanban-plugin{--lane-width: 272px}.kanban-plugin{contain:content;height:100%;width:100%;position:relative;display:flex;flex-direction:column}.kanban-plugin a.tag,.kanban-plugin__drag-container a.tag{padding-inline:var(--tag-padding-x);padding-block:var(--tag-padding-y)}.kanban-plugin__table-wrapper{height:100%;width:100%;overflow:auto;padding-block-end:40px;--table-column-first-border-width: 0;--table-column-last-border-width: 0;--table-row-last-border-width: 0}.kanban-plugin__table-wrapper table{width:fit-content;margin-block:0;margin-inline:auto;box-shadow:0 0 0 var(--table-border-width) var(--table-border-color)}.kanban-plugin__table-wrapper tr{width:fit-content}.kanban-plugin__table-wrapper th,.kanban-plugin__table-wrapper td{text-align:start;vertical-align:top;font-size:.875rem;padding:0!important;height:1px}.kanban-plugin__table-wrapper th.mod-has-icon .kanban-plugin__table-cell-wrapper,.kanban-plugin__table-wrapper td.mod-has-icon .kanban-plugin__table-cell-wrapper{padding-inline-end:var(--size-2-2)}.kanban-plugin__table-wrapper th .kanban-plugin__table-cell-wrapper,.kanban-plugin__table-wrapper td .kanban-plugin__table-cell-wrapper{height:100%;padding-inline:var(--size-4-2);padding-block:var(--size-2-2)}.kanban-plugin__table-wrapper th .kanban-plugin__item-prefix-button-wrapper input[type=checkbox],.kanban-plugin__table-wrapper td .kanban-plugin__item-prefix-button-wrapper input[type=checkbox]{margin-block:2px}.kanban-plugin__table-wrapper th:has(.markdown-source-view),.kanban-plugin__table-wrapper td:has(.markdown-source-view){--background-primary: var(--background-primary-alt);background:var(--background-primary);outline:2px solid var(--background-modifier-border-focus)}.kanban-plugin__table-wrapper thead tr>th{height:1px;background-color:var(--background-primary);position:sticky;top:0;z-index:1;overflow:visible}.kanban-plugin__table-wrapper thead tr>th:nth-child(2n+2){background-color:var(--background-primary)}.kanban-plugin__table-wrapper thead tr>th .kanban-plugin__table-cell-wrapper{height:100%;padding-block:var(--size-2-2);padding-inline:var(--size-4-2) var(--size-2-2);box-shadow:0 0 0 var(--table-border-width) var(--table-border-color)}.kanban-plugin__table-wrapper .resizer{position:absolute;top:0;height:100%;width:5px;background:var(--table-selection-border-color);cursor:col-resize;user-select:none;touch-action:none}.kanban-plugin__table-wrapper .resizer.ltr{right:0}.kanban-plugin__table-wrapper .resizer.rtl{left:0}.kanban-plugin__table-wrapper .resizer.isResizing{opacity:1}@media (hover: hover){.kanban-plugin__table-wrapper .resizer{opacity:0}.kanban-plugin__table-wrapper .resizer:hover{opacity:1}}.kanban-plugin__table-wrapper .kanban-plugin__item-tags:not(:empty){margin-block-start:-5px}.kanban-plugin__table-wrapper .kanban-plugin__item-metadata-date-relative{display:block}.kanban-plugin__table-wrapper .kanban-plugin__item-input-wrapper,.kanban-plugin__table-wrapper .cm-table-widget,.kanban-plugin__table-wrapper .kanban-plugin__item-title,.kanban-plugin__table-wrapper .kanban-plugin__item-title-wrapper,.kanban-plugin__table-wrapper .kanban-plugin__item-content-wrapper{height:100%}.kanban-plugin__table-wrapper .kanban-plugin__item-title-wrapper{padding:0}.kanban-plugin .markdown-source-view.mod-cm6{display:block;font-size:.875rem}.kanban-plugin .markdown-source-view.mod-cm6 .cm-scroller{overflow:visible}.kanban-plugin .markdown-source-view.mod-cm6 .cm-content{padding-top:0!important;padding-bottom:0!important}.kanban-plugin__table-header{display:flex;gap:var(--size-4-2);align-items:center;justify-content:space-between}.kanban-plugin__table-header-sort{line-height:1;color:var(--text-faint);padding:2px;border-radius:4px}.kanban-plugin__table-header-sort>span{display:flex}div:hover>.kanban-plugin__table-header-sort{background-color:var(--background-modifier-hover)}.kanban-plugin__cell-flex-wrapper{display:flex;gap:8px;align-items:flex-start;justify-content:space-between}.kanban-plugin__cell-flex-wrapper .lucide-more-vertical{transform:none}.kanban-plugin__icon-wrapper{display:flex;line-height:1}.kanban-plugin__icon-wrapper>.kanban-plugin__icon{display:flex}.kanban-plugin.something-is-dragging{cursor:grabbing;cursor:-webkit-grabbing}.kanban-plugin.something-is-dragging *{pointer-events:none}.kanban-plugin__item button,.kanban-plugin__lane button,.kanban-plugin button{line-height:1;margin:0;transition:.1s color,.1s background-color}.kanban-plugin__search-wrapper{width:100%;position:sticky;top:0;left:0;padding-block:10px;padding-inline:13px;display:flex;justify-content:flex-end;align-items:center;z-index:2;background-color:var(--background-primary)}button.kanban-plugin__search-cancel-button{display:flex;line-height:1;padding:6px;border:1px solid var(--background-modifier-border);background:var(--background-secondary-alt);color:var(--text-muted);margin-block:0;margin-inline:5px 0;font-size:16px}button.kanban-plugin__search-cancel-button .kanban-plugin__icon{display:flex}.kanban-plugin__icon{display:inline-block;line-height:1;--icon-size: 1em}.kanban-plugin__board{display:flex;width:100%;height:100%}.kanban-plugin__board>div{display:flex;align-items:flex-start;justify-content:flex-start;padding:1rem;width:fit-content;height:100%}.kanban-plugin__board.kanban-plugin__vertical>div{height:fit-content;width:100%;flex-direction:column}.is-mobile .view-content:not(.is-mobile-editing) .kanban-plugin__board>div{padding-bottom:calc(1rem + var(--mobile-navbar-height))}.kanban-plugin__board.is-adding-lane>div{padding-inline-end:calc(250px + 1rem)}.kanban-plugin__lane-wrapper{display:flex;flex-shrink:0;margin-inline-end:10px;max-height:100%;width:var(--lane-width)}.kanban-plugin__vertical .kanban-plugin__lane-wrapper{margin-block-end:10px;margin-inline-end:0}.kanban-plugin__lane{width:100%;display:flex;flex-direction:column;background-color:var(--background-secondary);border-radius:6px;border:1px solid var(--background-modifier-border)}.is-dropping>.kanban-plugin__lane{background-color:hsla(var(--interactive-accent-hsl),.15);border-color:hsla(var(--interactive-accent-hsl),1);outline:1px solid hsla(var(--interactive-accent-hsl),1)}.kanban-plugin__placeholder.kanban-plugin__lane-placeholder{height:100%;flex-grow:1;margin-inline-end:5px}.kanban-plugin__lane.is-hidden{display:none}.kanban-plugin__lane button{padding-block:8px;padding-inline:10px}.kanban-plugin__lane-form-wrapper{position:absolute;top:1rem;right:1rem;width:250px;background-color:var(--background-secondary);border-radius:6px;border:2px solid hsla(var(--interactive-accent-hsl),.7);z-index:var(--layer-popover);box-shadow:0 .5px 1px .5px #0000001a,0 2px 10px #0000001a,0 10px 20px #0000001a}.kanban-plugin__lane-input{--font-text-size: var(--font-ui-small);padding-block:var(--size-4-1);padding-inline:var(--size-4-2);background-color:var(--background-primary);border-radius:var(--radius-s)}.kanban-plugin__lane-input-wrapper{padding:10px}.kanban-plugin__item-input-actions,.kanban-plugin__lane-input-actions{display:flex;align-items:flex-start;justify-content:flex-start;padding-block:0 10px;padding-inline:10px}.kanban-plugin__item-input-actions button,.kanban-plugin__lane-input-actions button{display:block;margin-inline-end:5px}button.kanban-plugin__item-action-add,button.kanban-plugin__lane-action-add{background-color:var(--interactive-accent);color:var(--text-on-accent)}button.kanban-plugin__item-action-add:hover,button.kanban-plugin__lane-action-add:hover{background-color:var(--interactive-accent-hover)}.kanban-plugin__lane-header-wrapper{padding-block:8px;padding-inline:8px 12px;display:flex;align-items:center;gap:var(--size-4-1);flex-shrink:0;flex-grow:0;border-bottom:1px solid var(--background-modifier-border)}.collapse-horizontal .kanban-plugin__lane-header-wrapper,.collapse-vertical .kanban-plugin__lane-header-wrapper,.will-prepend .kanban-plugin__lane-header-wrapper{border-bottom:none}.kanban-plugin__lane-wrapper.collapse-horizontal{width:auto}.kanban-plugin__lane-wrapper.collapse-horizontal .kanban-plugin__lane-header-wrapper{writing-mode:vertical-lr}.kanban-plugin__lane-wrapper.collapse-horizontal .kanban-plugin__lane-header-wrapper{gap:var(--size-4-2)}.kanban-plugin__lane-wrapper.collapse-horizontal .kanban-plugin__lane-title-count,.kanban-plugin__lane-wrapper.collapse-horizontal .kanban-plugin__lane-title-text{transform:rotate(180deg)}.kanban-plugin__lane-wrapper.collapse-horizontal .kanban-plugin__lane-settings-button-wrapper{display:none}.kanban-plugin__lane-wrapper.collapse-vertical .kanban-plugin__lane-settings-button-wrapper{visibility:hidden}.kanban-plugin__lane-collapse{flex-grow:0;color:var(--text-faint)}.kanban-plugin__lane-collapse>span{display:flex}.collapse-vertical .kanban-plugin__lane-collapse>span{transform:rotate(-90deg)}.kanban-plugin__lane-grip{cursor:grab;flex-grow:0;color:var(--text-faint)}.kanban-plugin__lane-grip:active{cursor:grabbing}.kanban-plugin__lane-collapse svg{--icon-size: 1rem}.kanban-plugin__lane-grip>svg{height:1rem;display:block}.kanban-plugin__lane-title{font-weight:600;font-size:.875rem;flex-grow:1;width:100%;display:flex;flex-direction:column}.kanban-plugin__lane-title-text{flex-grow:1}div.kanban-plugin__lane-title-count{border-radius:3px;color:var(--text-muted);display:block;font-size:13px;line-height:1;padding:4px}div.kanban-plugin__lane-title-count.wip-exceeded{font-weight:700;color:var(--text-normal);background-color:rgba(var(--background-modifier-error-rgb),.25)}.kanban-plugin__table-cell-wrapper .kanban-plugin__lane-menu,.kanban-plugin__table-cell-wrapper .kanban-plugin__item-prefix-button,.kanban-plugin__item .kanban-plugin__item-prefix-button,.kanban-plugin__item .kanban-plugin__item-postfix-button,.kanban-plugin__lane .kanban-plugin__lane-settings-button{--icon-stroke: 2.5px;font-size:13px;line-height:1;color:var(--text-muted);padding:4px;display:flex;margin-inline-end:-4px}.kanban-plugin__table-cell-wrapper .kanban-plugin__lane-menu.is-enabled,.kanban-plugin__table-cell-wrapper .kanban-plugin__item-prefix-button.is-enabled,.kanban-plugin__item .kanban-plugin__item-prefix-button.is-enabled,.kanban-plugin__item .kanban-plugin__item-postfix-button.is-enabled,.kanban-plugin__lane .kanban-plugin__lane-settings-button.is-enabled{color:var(--text-accent)}.kanban-plugin__table-cell-wrapper .kanban-plugin__lane-menu{color:var(--text-faint);margin-inline-start:2px;margin-inline-end:0px}.kanban-plugin__table-cell-wrapper .kanban-plugin__item-prefix-button,.kanban-plugin__item .kanban-plugin__item-prefix-button{margin-inline-end:4px;margin-inline-start:-4px}.kanban-plugin__table-cell-wrapper button.kanban-plugin__item-prefix-button,.kanban-plugin__item button.kanban-plugin__item-prefix-button{margin-block:4px;margin-inline:0 7px;padding:0}.kanban-plugin__lane-action-wrapper,.kanban-plugin__item-edit-archive-button,.kanban-plugin__item-settings-actions .kanban-plugin__icon,.kanban-plugin__item-edit-archive-button>.kanban-plugin__icon,.kanban-plugin__item-prefix-button>.kanban-plugin__icon,.kanban-plugin__item-postfix-button>.kanban-plugin__icon,.kanban-plugin__lane-settings-button>.kanban-plugin__icon{display:flex}.kanban-plugin__lane-settings-button-wrapper{display:flex;gap:4px}button.kanban-plugin__lane-settings-button+button.kanban-plugin__lane-settings-button{margin-inline-start:2px}.kanban-plugin__lane-settings-button svg{width:1em;height:1em}.kanban-plugin__lane-items-wrapper{margin:4px;height:100%}.kanban-plugin__lane-items{padding:4px;margin-block:0;margin-inline:4px;display:flex;flex-direction:column}.kanban-plugin__lane-items>div{margin-block-start:4px}.kanban-plugin__lane-items>.kanban-plugin__placeholder{flex-grow:1}.kanban-plugin__lane-items>.kanban-plugin__placeholder:only-child{height:2.55em;border:3px dashed rgba(var(--text-muted-rgb),.1);margin-block-end:4px;border-radius:6px;transition:border .2s ease}.is-sorting .kanban-plugin__lane-items>.kanban-plugin__placeholder:only-child{border-color:hsla(var(--interactive-accent-hsl),.6)}.kanban-plugin__item-button-wrapper{border-top:1px solid var(--background-modifier-border);padding:8px;flex-shrink:0;flex-grow:0}.kanban-plugin__item-button-wrapper>button{text-align:left;width:100%}.kanban-plugin__lane-header-wrapper+.kanban-plugin__item-button-wrapper{border-top:none;border-bottom:1px solid var(--background-modifier-border);padding-block:4px 8px;padding-inline:8px}.kanban-plugin__item-form{border-top:1px solid var(--background-modifier-border);padding:8px}.kanban-plugin__item-form .kanban-plugin__item-input-wrapper{padding-block:6px;padding-inline:8px;border:1px solid var(--background-modifier-border);background-color:var(--background-primary);border-radius:var(--input-radius);min-height:var(--input-height)}.kanban-plugin__lane-header-wrapper+.kanban-plugin__item-form{border-top:none;border-bottom:1px solid var(--background-modifier-border);padding-block:4px 8px;padding-inline:8px}.kanban-plugin__item-input-wrapper{--line-height-normal: var(--line-height-tight);display:flex;flex-direction:column;flex-grow:1}.kanban-plugin button.kanban-plugin__item-submit-button{flex-grow:0;flex-shrink:1;font-size:14px;height:auto;line-height:1;margin-block-start:5px;width:auto}.is-mobile .kanban-plugin button.kanban-plugin__item-submit-button{font-size:12px}.is-mobile .kanban-plugin__lane-form-wrapper{--input-height: auto}.is-mobile .kanban-plugin__lane-form-wrapper button{padding-block:var(--size-4-2)}.is-mobile .kanban-plugin__lane-form-wrapper .markdown-source-view.mod-cm6{font-size:var(--font-ui-medium)}.is-mobile .kanban-plugin .kanban-plugin__lane-input-wrapper button.kanban-plugin__item-submit-button{display:none}button.kanban-plugin__new-item-button{background-color:transparent;color:var(--text-muted)}.kanban-plugin__new-item-button:hover{color:var(--text-on-accent);background-color:var(--interactive-accent-hover)}.kanban-plugin__drag-container>.kanban-plugin__item-wrapper .kanban-plugin__item{border-color:var(--interactive-accent);box-shadow:var(--shadow-s),0 0 0 2px hsla(var(--interactive-accent-hsl),.7)}.kanban-plugin__item{font-size:.875rem;border:1px solid var(--background-modifier-border);border-radius:var(--input-radius);overflow:hidden;transition:.3s opacity cubic-bezier(.25,1,.5,1),.2s border-color ease}.kanban-plugin__item:has(.markdown-source-view){outline:1px solid var(--background-modifier-border-focus);border-color:var(--background-modifier-border-focus)}.kanban-plugin__item.is-priority-high{border-color:#e03e3e;box-shadow:0 0 0 1px #e03e3e}.kanban-plugin__item.is-priority-medium{border-color:#e0a62e;box-shadow:0 0 0 1px #e0a62e}.kanban-plugin__item-content-wrapper{background:var(--background-primary)}.kanban-plugin__item-title-wrapper{background:var(--background-primary);display:flex;padding-block:6px;padding-inline:8px}.kanban-plugin__item-title-wrapper:not(:only-child){border-bottom:1px solid var(--background-modifier-border)}.kanban-plugin__item-title{width:100%;line-height:var(--line-height-tight);margin-block-start:1px}.kanban-plugin__meta-value,.kanban-plugin__markdown-preview-wrapper{white-space:pre-wrap;white-space:break-spaces;word-break:break-word;overflow-wrap:anywhere;--font-text-size: .875rem;--line-height-normal: var(--line-height-tight);--p-spacing: var(--size-4-2);--list-indent: 1.75em}.kanban-plugin__meta-value .markdown-preview-view,.kanban-plugin__markdown-preview-wrapper .markdown-preview-view{--file-margins: 0}.kanban-plugin__meta-value.inline,.kanban-plugin__markdown-preview-wrapper.inline{display:inline-block}.kanban-plugin__meta-value .kanban-plugin__markdown-preview-view>*:first-child,.kanban-plugin__markdown-preview-wrapper .kanban-plugin__markdown-preview-view>*:first-child{margin-block-start:0}.kanban-plugin__meta-value .kanban-plugin__markdown-preview-view>*:last-child,.kanban-plugin__markdown-preview-wrapper .kanban-plugin__markdown-preview-view>*:last-child{margin-block-end:0}.kanban-plugin__meta-value .markdown-preview-view,.kanban-plugin__markdown-preview-wrapper .markdown-preview-view{width:unset;height:unset;position:unset;overflow-y:unset;overflow-wrap:unset;color:unset;user-select:unset;-webkit-user-select:unset;white-space:normal}.kanban-plugin__meta-value .markdown-preview-view .markdown-embed,.kanban-plugin__markdown-preview-wrapper .markdown-preview-view .markdown-embed,.kanban-plugin__meta-value .markdown-preview-view blockquote,.kanban-plugin__markdown-preview-wrapper .markdown-preview-view blockquote{padding-inline:var(--size-4-2) 0;padding-block:var(--size-4-1);margin-block-start:var(--p-spacing);margin-block-end:var(--p-spacing)}.kanban-plugin__meta-value .kanban-plugin__markdown-preview-view{display:inline-flex}.kanban-plugin__meta-value .kanban-plugin__markdown-preview-view>div:first-child>*:first-child{margin-block-start:0}.kanban-plugin__meta-value .kanban-plugin__markdown-preview-view>div:last-child>*:last-child{margin-block-end:0}.kanban-plugin__embed-link-wrapper{padding:2px;float:right}.kanban-plugin__item-metadata-wrapper:not(:empty){background-color:var(--background-primary-alt);padding-inline:8px;padding-block:6px}.kanban-plugin__item-metadata:not(:empty){padding-block-start:5px;font-size:12px}.kanban-plugin__item-metadata:not(:empty) .markdown-preview-view{line-height:var(--line-height-tight);font-size:inherit}.kanban-plugin__item-metadata>span{display:block}.kanban-plugin__item-metadata>span.kanban-plugin__item-metadata-date-wrapper{display:inline-block}.kanban-plugin__item-metadata .is-button{cursor:var(--cursor)}.kanban-plugin__item-metadata .is-button:hover{color:var(--text-normal)}.kanban-plugin__item-metadata-date-relative:first-letter{text-transform:uppercase}.kanban-plugin__item-metadata a{text-decoration:none}.kanban-plugin__item-metadata-bottom{display:flex;align-items:center;justify-content:space-between;gap:6px;padding-block-start:4px}.kanban-plugin__item-metadata-bottom-right{display:flex;align-items:center;gap:4px;margin-inline-start:auto}.kanban-plugin__item-date-bubble{display:inline-flex;align-items:center;gap:4px;font-size:11px;line-height:1;color:var(--text-muted);background-color:var(--background-secondary);border-radius:var(--radius-s);padding:3px 6px;cursor:var(--cursor);user-select:none;flex-shrink:0}.kanban-plugin__item-date-bubble:hover{color:var(--text-normal);background-color:var(--background-modifier-hover)}.kanban-plugin__item-date-bubble.has-date{color:var(--date-color, var(--text-muted))}.kanban-plugin__item-date-bubble.has-background{background-color:var(--date-background-color, var(--background-secondary));color:var(--date-color, var(--text-on-accent))}.kanban-plugin__item-date-bubble svg{flex-shrink:0}.kanban-plugin__item-date-bubble-date{font-weight:500;white-space:nowrap}.kanban-plugin__item-date-bubble-countdown{opacity:.75;white-space:nowrap}.kanban-plugin__item-date-bubble-countdown:before{content:"\b7";margin-inline-end:4px}.kanban-plugin__item-date-bubble-empty{display:inline-flex;align-items:center;opacity:.5}.kanban-plugin__item-story-points{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:22px;padding-inline:4px;font-size:12px;font-weight:600;line-height:1;flex-shrink:0;color:var(--text-muted);background-color:var(--background-secondary);border-radius:var(--radius-s);cursor:var(--cursor);user-select:none}.kanban-plugin__item-story-points:hover{color:var(--text-normal);background-color:var(--background-modifier-hover)}.kanban-plugin__item-story-points-input{width:40px;height:22px;padding-inline:4px;font-size:12px;font-weight:600;text-align:center;border:1px solid var(--interactive-accent);border-radius:var(--radius-s);background-color:var(--background-primary);color:var(--text-normal);outline:none;flex-shrink:0;-moz-appearance:textfield}.kanban-plugin__item-story-points-input::-webkit-outer-spin-button,.kanban-plugin__item-story-points-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}.kanban-plugin__item-priority-select{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding-inline:4px;font-size:11px;font-weight:700;line-height:1;flex-shrink:0;color:var(--text-muted);background-color:var(--background-secondary);border-radius:var(--radius-s);cursor:var(--cursor);user-select:none}.kanban-plugin__item-priority-select:hover{background-color:var(--background-modifier-hover)}.kanban-plugin__item-priority-select.is-low{color:var(--color-green, #4caf50)}.kanban-plugin__item-priority-select.is-medium{color:var(--color-yellow, #e0a62e)}.kanban-plugin__item-priority-select.is-high{color:var(--color-red, #e03e3e)}.kanban-plugin__item-priority-select-value{display:flex;align-items:center;justify-content:center;width:100%;height:100%}.kanban-plugin__item-priority-dropdown{position:fixed;z-index:var(--layer-popover);background-color:var(--background-primary);border:1px solid var(--background-modifier-border);border-radius:var(--radius-s);box-shadow:var(--shadow-s);overflow:hidden;min-width:80px}.kanban-plugin__item-priority-option{padding:4px 8px;font-size:12px;cursor:var(--cursor);color:var(--text-normal)}.kanban-plugin__item-priority-option:hover{background-color:var(--background-modifier-hover)}.kanban-plugin__item-priority-option.is-selected{font-weight:600;background-color:var(--background-secondary)}.kanban-plugin__item-priority-option.is-low{color:#4caf50}.kanban-plugin__item-priority-option.is-medium{color:#e0a62e}.kanban-plugin__item-priority-option.is-high{color:#e03e3e}.kanban-plugin__item.has-category{position:relative;overflow:hidden;padding-left:10px}.kanban-plugin__item.has-category:before{content:"";position:absolute;top:0;left:0;bottom:0;width:4px;background-color:var(--category-color);border-radius:var(--input-radius) 0 0 var(--input-radius);z-index:1}.kanban-plugin__category-select{display:inline-flex;align-items:center;flex-shrink:0}.kanban-plugin__category-select-trigger{display:inline-flex;align-items:center;gap:4px;cursor:var(--cursor);padding:2px 4px;border-radius:var(--radius-s)}.kanban-plugin__category-select-trigger:hover{background-color:var(--background-modifier-hover)}.kanban-plugin__category-dot{display:block;width:10px;height:10px;border-radius:50%;flex-shrink:0}.kanban-plugin__category-label{font-size:11px;line-height:1;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:72px}.kanban-plugin__category-dropdown{position:fixed;z-index:var(--layer-popover);background-color:var(--background-primary);border:1px solid var(--background-modifier-border);border-radius:var(--radius-s);box-shadow:var(--shadow-s);overflow:hidden;min-width:120px;max-height:250px;overflow-y:auto}.kanban-plugin__category-option{display:flex;align-items:center;gap:8px;padding:5px 10px;font-size:12px;cursor:var(--cursor);color:var(--text-normal)}.kanban-plugin__category-option:hover{background-color:var(--background-modifier-hover)}.kanban-plugin__category-option.is-selected{font-weight:600;background-color:var(--background-secondary)}.kanban-plugin__category-option-dot{display:block;width:10px;height:10px;border-radius:50%;flex-shrink:0}.kanban-plugin__category-modal .modal-content{padding:0}.kanban-plugin__category-list{padding:16px 20px}.kanban-plugin__category-list-header{margin-block-end:12px}.kanban-plugin__category-list-header h3{margin:0 0 4px;font-size:1rem}.kanban-plugin__category-list-desc{color:var(--text-muted);font-size:.8125rem;margin:0}.kanban-plugin__category-items{display:flex;flex-direction:column;gap:6px;margin-block-end:12px}.kanban-plugin__category-reorder-btns{display:flex;flex-direction:column;gap:0;flex-shrink:0}.kanban-plugin__category-reorder-btn{padding:0;display:flex;align-items:center;justify-content:center;color:var(--text-muted)}.kanban-plugin__category-reorder-btn:hover:not(:disabled){color:var(--text-normal)}.kanban-plugin__category-reorder-btn:disabled{opacity:.25;cursor:default}.kanban-plugin__category-item{display:flex;align-items:center;gap:8px;padding:6px 8px;border:1px solid var(--background-modifier-border);border-radius:var(--radius-s);background:var(--background-secondary)}.kanban-plugin__category-color-input{width:28px;height:28px;padding:0;border:1px solid var(--background-modifier-border);border-radius:var(--radius-s);cursor:var(--cursor);flex-shrink:0;background:none}.kanban-plugin__category-color-input::-webkit-color-swatch-wrapper{padding:2px}.kanban-plugin__category-color-input::-webkit-color-swatch{border:none;border-radius:3px}.kanban-plugin__category-name-input{flex-grow:1;border:1px solid var(--background-modifier-border);border-radius:var(--radius-s);padding:4px 8px;font-size:.875rem;background:var(--background-primary);color:var(--text-normal)}.kanban-plugin__category-delete-btn{color:var(--text-muted);flex-shrink:0;padding:4px;border-radius:var(--radius-s)}.kanban-plugin__category-delete-btn:hover{color:var(--text-error);background-color:rgba(var(--background-modifier-error-rgb),.1)}.kanban-plugin__category-add-btn{font-size:.8125rem;color:var(--text-muted);cursor:var(--cursor);padding:6px 10px;border:1px dashed var(--background-modifier-border);border-radius:var(--radius-s);background:transparent;width:100%;text-align:center}.kanban-plugin__category-add-btn:hover{color:var(--text-normal);border-color:var(--interactive-accent);background-color:hsla(var(--interactive-accent-hsl),.05)}.kanban-plugin__item-metadata-bottom-left{display:flex;align-items:center;gap:4px}.kanban-plugin__item-task-inline-metadata-item,.kanban-plugin__item-task-metadata-item{display:inline-flex;margin-block:3px 0;margin-inline:0 6px;gap:4px}.kanban-plugin__item-task-inline-metadata-item{padding-inline:2px;background-color:var(--background-secondary);border-radius:var(--radius-s)}.kanban-plugin__table-cell-wrapper .kanban-plugin__item-task-inline-metadata-item{background-color:unset;padding-inline:unset;border-radius:unset}.kanban-plugin__item-tags:not(:empty){padding-block-start:2px}.kanban-plugin__item-tag{display:inline-block;margin-inline-end:4px}.kanban-plugin__item-tags .kanban-plugin__item-tag{font-size:12px;background-color:var(--tag-background, hsla(var(--interactive-accent-hsl), .1));color:var(--tag-color, var(--text-accent));margin-block:3px 0;margin-inline:0 3px}.kanban-plugin__item-tag.is-search-match,.kanban-plugin__item-tags .kanban-plugin__item-tag.is-search-match{background-color:var(--text-highlight-bg);color:var(--text-normal)}.kanban-plugin__meta-table{width:100%;margin:0;line-height:var(--line-height-tight);font-size:.75rem}.kanban-plugin__meta-table .markdown-preview-view{font-size:.75rem}.kanban-plugin__meta-table .kanban-plugin__item-tags .kanban-plugin__item-tag{position:relative;inset-block-start:-2px;margin-block:0 3px}.kanban-plugin__meta-table td{vertical-align:top;padding-block:3px 0;padding-inline:0;width:10%}.kanban-plugin__meta-table td+td{width:90%}.kanban-plugin__meta-table td:only-child{width:100%}.kanban-plugin__meta-table td.kanban-plugin__meta-key{white-space:nowrap;padding-inline-end:5px;color:var(--text-muted)}.kanban-plugin__meta-table td.kanban-plugin__meta-key.is-search-match>span{background-color:var(--text-highlight-bg);color:var(--text-normal)}.kanban-plugin__meta-value:not(.mod-array){white-space:pre-wrap;display:flex}.kanban-plugin__meta-value>.is-search-match,.kanban-plugin__meta-value.is-search-match{background-color:var(--text-highlight-bg);color:var(--text-normal)}.kanban-plugin__item-prefix-button-wrapper,.kanban-plugin__item-postfix-button-wrapper{display:flex;flex-grow:0;flex-shrink:0;align-self:start}.kanban-plugin__item-prefix-button-wrapper>div,.kanban-plugin__item-postfix-button-wrapper>div{display:flex;flex-direction:column;gap:var(--size-4-1)}.kanban-plugin__item-prefix-button-wrapper{flex-direction:column}.kanban-plugin__item-prefix-button-wrapper .kanban-plugin__item-prefix-button{width:var(--checkbox-size);height:var(--checkbox-size)}.kanban-plugin__item-prefix-button-wrapper .kanban-plugin__item-prefix-button,.kanban-plugin__item-prefix-button-wrapper input[type=checkbox]{margin-block:2px;margin-inline:0px 7px}.kanban-plugin__item-prefix-button-wrapper .kanban-plugin__item-prefix-button+button,.kanban-plugin__item-prefix-button-wrapper input[type=checkbox]+button{margin-block-start:10px}button.kanban-plugin__item-postfix-button{visibility:hidden;opacity:0;transition:.1s opacity;display:flex;align-self:flex-start}button.kanban-plugin__item-postfix-button.is-enabled,.kanban-plugin__item:hover button.kanban-plugin__item-postfix-button{visibility:visible;opacity:1}.kanban-plugin__item-settings-actions{padding:5px;display:flex}.kanban-plugin__item-settings-actions>button{line-height:1;display:flex;align-items:center;justify-content:center;font-size:.75rem;width:100%}.kanban-plugin__lane-action-wrapper button>.kanban-plugin__icon,.kanban-plugin__item-settings-actions button>.kanban-plugin__icon{margin-inline-end:5px}.kanban-plugin__item-settings-actions>button:first-child,.kanban-plugin__lane-action-wrapper>button:first-child{margin-inline-end:2.5px}.kanban-plugin__item-settings-actions>button:last-child,.kanban-plugin__lane-action-wrapper>button:last-child{margin-inline-start:2.5px}.kanban-plugin__archive-lane-button,.kanban-plugin__item-button-archive{color:var(--text-muted);border:1px solid var(--background-modifier-border)}.kanban-plugin__archive-lane-button:hover,.kanban-plugin__item-button-archive:hover{color:var(--text-normal)}.kanban-plugin__item-button-delete{border:1px solid rgba(var(--background-modifier-error-rgb),.15);color:rgba(var(--background-modifier-error-rgb),1)}.kanban-plugin__item-button-delete:hover{background-color:rgba(var(--background-modifier-error-rgb),.2);color:var(--text-error)}.theme-dark .kanban-plugin__item-button-delete{background-color:transparent;border:1px solid rgba(var(--background-modifier-error-rgb),1);color:var(--text-error)}.theme-dark .kanban-plugin__item-button-delete:hover{background-color:rgba(var(--background-modifier-error-rgb),1);color:var(--text-error)}.kanban-plugin__checkbox-wrapper{border-top:1px solid var(--background-modifier-border);border-bottom:1px solid var(--background-modifier-border);padding:10px;margin-block-end:10px;display:flex;align-items:center}.kanban-plugin__checkbox-wrapper .checkbox-container{flex-shrink:0;flex-grow:0;margin-inline-start:15px}.kanban-plugin__checkbox-label{font-size:.8125rem;line-height:var(--line-height-tight)}.kanban-plugin__lane-setting-wrapper>div{border-top:none;border-bottom:none;padding-block:10px;padding-inline:15px;margin-block-end:0}.kanban-plugin__lane-setting-wrapper>div:last-child{border-bottom:1px solid var(--background-modifier-border);margin-block-end:10px}.kanban-plugin__action-confirm-wrapper{border:1px solid rgba(var(--background-modifier-error-rgb),.2);background-color:rgba(var(--background-modifier-error-rgb),.1);border-radius:4px;padding:10px;margin-block:5px;margin-inline:10px}.theme-dark .kanban-plugin__action-confirm-wrapper{border:1px solid rgba(var(--background-modifier-error-rgb),1)}.kanban-plugin__delete-lane-button,.kanban-plugin__archive-lane-button{display:flex;align-items:center;justify-content:center;font-size:.75rem;width:50%}.kanban-plugin__delete-lane-button{border:1px solid rgba(var(--background-modifier-error-rgb),.15);color:rgba(var(--background-modifier-error-rgb),1)}.kanban-plugin__delete-lane-button:hover{background-color:rgba(var(--background-modifier-error-rgb),.2);color:var(--text-error)}.theme-dark .kanban-plugin__delete-lane-button{background-color:transparent;border:1px solid rgba(var(--background-modifier-error-rgb),1);color:var(--text-error)}.theme-dark .kanban-plugin__delete-lane-button:hover{background-color:rgba(var(--background-modifier-error-rgb),1);color:var(--text-error)}.kanban-plugin__action-confirm-text{font-size:.875rem;color:var(--text-error);margin-block-end:10px;line-height:var(--line-height-tight)}button.kanban-plugin__confirm-action-button{border:1px solid rgba(var(--background-modifier-error-rgb),.2);margin-inline-end:5px;color:var(--text-error)}button.kanban-plugin__confirm-action-button:hover{background-color:rgba(var(--background-modifier-error-rgb),.5)}button.kanban-plugin__cancel-action-button{border:1px solid var(--background-modifier-border)}.modal.kanban-plugin__board-settings-modal{width:var(--modal-width);height:var(--modal-height);max-height:var(--modal-max-height);max-width:var(--modal-max-width);padding:0;display:flex;flex-direction:column}.modal.kanban-plugin__board-settings-modal .modal-content{padding-block:30px;padding-inline:50px;height:100%;overflow-y:auto;overflow-x:hidden;margin:0}.kanban-plugin__board-settings-modal .setting-item{flex-wrap:wrap;justify-content:space-between}.kanban-plugin__board-settings-modal .setting-item-info{max-width:400px;min-width:300px;width:50%}.kanban-plugin__board-settings-modal .setting-item-control{min-width:300px;flex-shrink:0}.kanban-plugin__board-settings-modal .choices{width:100%;text-align:left}.kanban-plugin__board-settings-modal .choices[data-type*=select-one] .choices__inner{background-color:var(--background-primary);border-color:var(--background-modifier-border);padding:0;min-height:0}.kanban-plugin__board-settings-modal .choices[data-type*=select-one] .choices__input{background-color:var(--background-primary);border-bottom-color:var(--background-modifier-border);font-size:14px}.kanban-plugin__board-settings-modal .choices__input{border-radius:0;border-top:none;border-left:none;border-right:none}.kanban-plugin__board-settings-modal .choices__list[role=listbox]{overflow-x:hidden}.kanban-plugin__board-settings-modal .choices__list--single{padding-block:4px;padding-inline:6px 20px}.kanban-plugin__board-settings-modal .is-open .choices__list--dropdown,.kanban-plugin__board-settings-modal .choices__list--dropdown{background-color:var(--background-primary);border-color:var(--background-modifier-border);word-break:normal;max-height:200px;display:flex;flex-direction:column}.kanban-plugin__board-settings-modal .choices__list--dropdown .choices__item--selectable:after{display:none}.kanban-plugin__board-settings-modal .choices__list--dropdown .choices__item--selectable{padding-block:4px;padding-inline:6px}.kanban-plugin__board-settings-modal .choices__list--dropdown .choices__item.is-highlighted{background-color:var(--background-primary-alt)}.kanban-plugin__board-settings-modal .choices__placeholder{opacity:1;color:var(--text-muted)}.kanban-plugin__board-settings-modal .error{border-color:var(--background-modifier-error-hover)!important}.kanban-plugin__date-picker{position:absolute;z-index:var(--layer-popover);--cell-size: 2.4em}.kanban-plugin__date-picker .flatpickr-input{width:0;height:0;opacity:0;border:none;padding:0;display:block;margin-block-end:-1px}.kanban-plugin__date-picker .flatpickr-current-month{color:var(--text-normal);font-weight:600;font-size:inherit;width:100%;position:static;height:auto;display:flex;align-items:center;justify-content:center;padding:0}.kanban-plugin__date-picker .flatpickr-current-month .numInputWrapper span.arrowUp:after{border-bottom-color:var(--text-normal)}.kanban-plugin__date-picker .flatpickr-current-month .numInputWrapper span.arrowDown:after{border-top-color:var(--text-normal)}.flatpickr-months .flatpickr-prev-month svg path,.flatpickr-months .flatpickr-next-month svg path{fill:currentColor}.kanban-plugin__date-picker .flatpickr-calendar{border-radius:var(--radius-m);font-size:13px;overflow:hidden;background-color:var(--background-primary);width:calc(var(--cell-size) * 7 + 8px);box-shadow:0 0 0 1px var(--background-modifier-border),0 15px 25px #0003}.kanban-plugin__date-picker .flatpickr-calendar.inline{top:0}.kanban-plugin__date-picker .flatpickr-months{font-size:13px;padding-block:2px 4px;padding-inline:2px;align-items:center}.kanban-plugin__date-picker .flatpickr-months .flatpickr-current-month input.cur-year,.kanban-plugin__date-picker .flatpickr-months select{border-radius:4px;padding:4px}.kanban-plugin__date-picker .flatpickr-months .numInputWrapper{border-radius:4px}.kanban-plugin__date-picker .flatpickr-months .flatpickr-month{width:100%;height:auto}.kanban-plugin__date-picker .flatpickr-months .flatpickr-prev-month,.kanban-plugin__date-picker .flatpickr-months .flatpickr-next-month{color:var(--text-normal);fill:currentColor;border-radius:4px;display:flex;align-items:center;justify-content:center;line-height:1;height:auto;padding:5px;position:static;flex-shrink:0}.kanban-plugin__date-picker .flatpickr-months .flatpickr-prev-month:hover,.kanban-plugin__date-picker .flatpickr-months .flatpickr-next-month:hover{background-color:var(--background-primary-alt);color:var(--text-normal)}.kanban-plugin__date-picker .flatpickr-months .flatpickr-prev-month:hover svg,.kanban-plugin__date-picker .flatpickr-months .flatpickr-next-month:hover svg{fill:currentColor}.kanban-plugin__date-picker .flatpickr-current-month .flatpickr-monthDropdown-months{box-shadow:none;color:var(--text-normal);font-weight:inherit;margin-inline-end:5px}.kanban-plugin__date-picker .flatpickr-current-month input.cur-year{color:var(--text-normal);font-weight:inherit}.kanban-plugin__date-picker .flatpickr-weekdays{height:auto;padding-block:8px 12px;padding-inline:0}.kanban-plugin__date-picker span.flatpickr-weekday{font-weight:400;color:var(--text-muted)}.kanban-plugin__date-picker .flatpickr-innerContainer{padding:4px}.kanban-plugin__date-picker .flatpickr-day{color:var(--text-normal);display:inline-flex;align-items:center;justify-content:center;width:var(--cell-size);height:var(--cell-size);line-height:1;border-radius:6px}.kanban-plugin__date-picker .flatpickr-day.today{border-color:var(--interactive-accent)}.kanban-plugin__date-picker .flatpickr-day.today:hover{color:var(--text-normal);border-color:var(--interactive-accent);background-color:var(--background-primary-alt)}.kanban-plugin__date-picker .flatpickr-day.selected{border-color:var(--interactive-accent);background-color:var(--interactive-accent);color:var(--text-on-accent)}.kanban-plugin__date-picker .flatpickr-day.selected:hover{border-color:var(--interactive-accent);background-color:var(--interactive-accent)}.kanban-plugin__date-picker .flatpickr-days{width:calc(var(--cell-size) * 7)}.kanban-plugin__date-picker .dayContainer{width:calc(var(--cell-size) * 7);min-width:calc(var(--cell-size) * 7);max-width:calc(var(--cell-size) * 7)}.kanban-plugin__date-picker .flatpickr-day.inRange,.kanban-plugin__date-picker .flatpickr-day.prevMonthDay.inRange,.kanban-plugin__date-picker .flatpickr-day.nextMonthDay.inRange,.kanban-plugin__date-picker .flatpickr-day.today.inRange,.kanban-plugin__date-picker .flatpickr-day.prevMonthDay.today.inRange,.kanban-plugin__date-picker .flatpickr-day.nextMonthDay.today.inRange,.kanban-plugin__date-picker .flatpickr-day:hover,.kanban-plugin__date-picker .flatpickr-day.prevMonthDay:hover,.kanban-plugin__date-picker .flatpickr-day.nextMonthDay:hover,.kanban-plugin__date-picker .flatpickr-day:focus,.kanban-plugin__date-picker .flatpickr-day.prevMonthDay:focus,.kanban-plugin__date-picker .flatpickr-day.nextMonthDay:focus{background-color:var(--background-primary-alt);border-color:var(--background-primary-alt)}.kanban-plugin__date-picker .flatpickr-day.flatpickr-disabled,.kanban-plugin__date-picker .flatpickr-day.flatpickr-disabled:hover,.kanban-plugin__date-picker .flatpickr-day.prevMonthDay,.kanban-plugin__date-picker .flatpickr-day.nextMonthDay,.kanban-plugin__date-picker .flatpickr-day.notAllowed,.kanban-plugin__date-picker .flatpickr-day.notAllowed.prevMonthDay,.kanban-plugin__date-picker .flatpickr-day.notAllowed.nextMonthDay{color:var(--text-faint)}.kanban-plugin__time-picker{position:absolute;max-height:250px;overflow:auto;border-radius:4px;border:1px solid var(--background-modifier-border);box-shadow:0 2px 8px var(--background-modifier-box-shadow);background:var(--background-primary);color:var(--text-normal);font-size:14px;z-index:var(--layer-menu)}.kanban-plugin__time-picker-item{display:flex;align-items:center;color:var(--text-muted);cursor:var(--cursor);line-height:1;padding-block:6px;padding-inline:8px}.kanban-plugin__time-picker-check{visibility:hidden;display:inline-flex;margin-inline-end:5px}.kanban-plugin__time-picker-item.is-hour{color:var(--text-normal);font-weight:600}.kanban-plugin__time-picker-item.is-selected .kanban-plugin__time-picker-check{visibility:visible}.kanban-plugin__time-picker-item:hover,.kanban-plugin__time-picker-item.is-selected{background:var(--background-secondary)}.kanban-plugin mark{background-color:var(--text-highlight-bg)}.kanban-plugin__draggable-setting-container{border-top:0;padding:0;flex-direction:column}.kanban-plugin__draggable-setting-container>div{width:100%;margin-inline-end:0!important}.kanban-plugin__setting-item-wrapper{border-top:1px solid var(--background-modifier-border)}.kanban-plugin__draggable-setting-container>.kanban-plugin__placeholder{border-top:1px solid var(--background-modifier-border)}.kanban-plugin__setting-item{background-color:var(--background-secondary);width:100%;font-size:16px;display:flex;align-items:flex-start;padding:12px;color:var(--text-muted)}.kanban-plugin__drag-container .kanban-plugin__setting-item{border:1px solid hsla(var(--interactive-accent-hsl),.8);box-shadow:0 15px 25px #0003,0 0 0 2px hsla(var(--interactive-accent-hsl),.8)}.kanban-plugin__setting-controls-wrapper{flex-grow:1;flex-shrink:1}.kanban-plugin__setting-input-wrapper{display:flex;flex-wrap:wrap;margin-block-end:1rem}.kanban-plugin__setting-input-wrapper>div{margin-inline-end:10px}.kanban-plugin__setting-toggle-wrapper>div{display:flex;align-items:center;line-height:1;margin-block-end:10px}.kanban-plugin__setting-toggle-wrapper .checkbox-container{margin-inline-end:10px}.kanban-plugin__setting-button-wrapper{display:flex;justify-content:flex-end;flex-grow:1;flex-shrink:0;max-width:25px}.kanban-plugin__setting-button-wrapper>div{margin-inline-start:12px}.kanban-plugin__setting-key-input-wrapper{margin-block:1rem;margin-inline:0}.kanban-plugin__setting-key-input-wrapper>input{margin-inline-end:10px}.kanban-plugin__date-color-input-wrapper,.kanban-plugin__tag-sort-input-wrapper,.kanban-plugin__tag-color-input-wrapper{display:flex;flex-direction:column;flex-grow:1;gap:1rem}.kanban-plugin__tag-sort-input-wrapper .kanban-plugin__setting-key-input-wrapper{margin-block-start:0}.kanban-plugin__tag-sort-input-wrapper .kanban-plugin__setting-input-wrapper{margin:0}.kanban-plugin__add-tag-color-button{align-self:baseline;margin:0}.kanban-plugin__date-color-wrapper,.kanban-plugin__tag-color-input .kanban-plugin__item-tags{background-color:var(--background-primary);padding:10px;margin:0;border-radius:4px}.kanban-plugin__tag-color-input .kanban-plugin__item-tag{margin-block-start:0;font-size:13px;font-weight:500;line-height:1.5}.kanban-plugin__date-color-input-wrapper input[type=number]{width:75px;padding-block:.6em;padding-inline:.8em;height:auto;border-radius:.5em}.kanban-plugin__date-color-input-wrapper .kanban-plugin__setting-item-label{margin-block-end:0}.kanban-plugin__date-color-config{padding-block:0 10px;padding-inline:0;display:flex;flex-wrap:wrap;gap:5px;align-items:center}.kanban-plugin__date-color-wrapper{display:inline-block;margin-block-start:10px}.kanban-plugin__date-color-wrapper .kanban-plugin__item-metadata{padding:0}.kanban-plugin__metadata-setting-desc{font-size:14px}.kanban-plugin__setting-button-spacer{visibility:hidden}.kanban-plugin__setting-item-label{font-size:12px;font-weight:700;margin-block-end:5px}.kanban-plugin__setting-toggle-wrapper .kanban-plugin__setting-item-label{margin-block-end:0}.kanban-plugin__hitbox{border:2px dashed tomato}.kanban-plugin__placeholder{flex-grow:0;flex-shrink:0;width:0;height:0;pointer-events:none}.kanban-plugin__placeholder[data-axis=horizontal]{height:100%}.kanban-plugin__placeholder[data-axis=vertical]{width:100%}body:not(.native-scrollbars) .kanban-plugin__scroll-container::-webkit-scrollbar{background-color:transparent;width:16px;height:16px}body:not(.native-scrollbars) .kanban-plugin__scroll-container::-webkit-scrollbar-thumb{border:4px solid transparent;background-clip:content-box}.kanban-plugin__scroll-container{will-change:transform}.kanban-plugin__scroll-container.kanban-plugin__horizontal{overflow-y:hidden;overflow-x:auto}.kanban-plugin__scroll-container.kanban-plugin__vertical{overflow-y:auto;overflow-x:hidden}.kanban-plugin__drag-container{contain:layout size;z-index:10000;pointer-events:none;position:fixed;top:0;left:0}.kanban-plugin__loading{width:100%;height:100%;display:flex;justify-content:center;align-items:center}.sk-pulse{width:60px;height:60px;background-color:var(--text-faint);border-radius:100%;animation:sk-pulse 1.2s infinite cubic-bezier(.455,.03,.515,.955)}@keyframes sk-pulse{0%{transform:scale(0)}to{transform:scale(1);opacity:0}}.kanban-plugin__color-picker-wrapper{position:relative}.kanban-plugin__color-picker{position:absolute;top:-5px;left:0;transform:translateY(-100%)}.kanban-plugin__date,.cm-kanban-time-wrapper,.cm-kanban-date-wrapper{display:inline-block;color:var(--date-color);border-radius:var(--radius-s);background-color:var(--date-background-color, rgba(var(--mono-rgb-100), .05))}.kanban-plugin__date:hover,.cm-kanban-time-wrapper:hover,.cm-kanban-date-wrapper:hover{background-color:var(--date-background-color, rgba(var(--mono-rgb-100), .1))}.kanban-plugin__date.kanban-plugin__preview-date-link,.cm-kanban-time-wrapper.kanban-plugin__preview-date-link,.cm-kanban-date-wrapper.kanban-plugin__preview-date-link{--link-decoration: none;--link-unresolved-decoration-style: unset}.kanban-plugin__date>span,.cm-kanban-time-wrapper>span,.cm-kanban-date-wrapper>span,.kanban-plugin__date>a,.cm-kanban-time-wrapper>a,.cm-kanban-date-wrapper>a{padding-inline:var(--size-2-1)}.completion .kanban-plugin__date.has-background{color:inherit;background-color:transparent}.completion .kanban-plugin__date.has-background:hover{background-color:transparent}.is-date .kanban-plugin__date:not(.has-background){background-color:transparent}.is-date .kanban-plugin__date:not(.has-background):hover{background-color:transparent}.kanban-plugin__meta-value .kanban-plugin__date:hover{background-color:var(--date-background-color, rgba(var(--mono-rgb-100), .05))}
+
+
+/* Kanban Live Cards v1 -----------------------------------------------------
+   Persistent native Obsidian editor inside cards.  Inactive cards remain
+   drag-first; clicking the editor activates text interaction/selection. */
+.kanban-plugin__item-live-editor-wrapper {
+  --line-height-normal: var(--line-height-tight);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-width: 0;
+  width: 100%;
+}
+
+.kanban-plugin__item-live-editor-wrapper .markdown-source-view.mod-cm6,
+.kanban-plugin__item-live-editor-wrapper .cm-editor,
+.kanban-plugin__item-live-editor-wrapper .cm-scroller {
+  width: 100%;
+  background: transparent;
+}
+
+.kanban-plugin__item-live-editor-wrapper .cm-editor.cm-focused {
+  outline: none;
+}
+
+.kanban-plugin__item-live-editor-wrapper .cm-scroller {
+  overflow: visible;
+}
+
+.kanban-plugin__item-live-editor-wrapper .cm-content {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.kanban-plugin__item-live-editor:not([data-ignore-drag]) {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.kanban-plugin__item-live-editor[data-ignore-drag] {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Live Cards v5 — compact per-card field header */
+.kanban-plugin__item-card-header {
+  height: 20px;
+  min-height: 20px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 1px 2px;
+  overflow: visible;
+}
+
+.kanban-plugin__item-card-footer-space {
+  height: 20px;
+  min-height: 20px;
+  pointer-events: none;
+}
+
+/* Empty controls are latent until the card is hovered/focused. Values stay visible. */
+.kanban-plugin__item-card-header .is-empty {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .12s ease;
+}
+
+.kanban-plugin__item:hover .kanban-plugin__item-card-header .is-empty,
+.kanban-plugin__item:focus-within .kanban-plugin__item-card-header .is-empty {
+  opacity: .58;
+  pointer-events: auto;
+}
+
+.is-mobile .kanban-plugin__item-card-header .is-empty {
+  opacity: .58;
+  pointer-events: auto;
+}
+
+.kanban-plugin__item-card-header .has-value {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.kanban-plugin__item-card-header .kanban-plugin__item-date-bubble,
+.kanban-plugin__item-card-header .kanban-plugin__item-priority-select,
+.kanban-plugin__item-card-header .kanban-plugin__category-select,
+.kanban-plugin__item-card-header .kanban-plugin__item-story-points,
+.kanban-plugin__item-card-header .kanban-plugin__item-assignment-picker {
+  box-sizing: border-box;
+  min-height: 18px;
+  height: 18px;
+  line-height: 18px;
+  border: 0;
+  background: transparent !important;
+  box-shadow: none;
+  margin: 0;
+  padding: 0 4px;
+  border-radius: 4px;
+  font-size: 10px;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.kanban-plugin__item-card-header .kanban-plugin__item-date-bubble:hover,
+.kanban-plugin__item-card-header .kanban-plugin__item-priority-select:hover,
+.kanban-plugin__item-card-header .kanban-plugin__category-select:hover,
+.kanban-plugin__item-card-header .kanban-plugin__item-story-points:hover,
+.kanban-plugin__item-card-header .kanban-plugin__item-assignment-picker:hover {
+  background: var(--background-modifier-hover) !important;
+}
+
+.kanban-plugin__item-card-header .kanban-plugin__item-date-bubble {
+  padding-inline: 3px;
+}
+.kanban-plugin__item-card-header .kanban-plugin__item-date-bubble svg {
+  width: 12px;
+  height: 12px;
+}
+.kanban-plugin__item-card-header .kanban-plugin__item-date-bubble-countdown {
+  display: none;
+}
+
+.kanban-plugin__item-card-header .kanban-plugin__item-priority-select-value {
+  min-width: 14px;
+  text-align: center;
+  font-weight: 650;
+}
+.kanban-plugin__item-card-header .kanban-plugin__item-priority-select.is-p1,
+.kanban-plugin__item-card-header .kanban-plugin__item-priority-option.is-p1 { color: var(--color-red, #e05252); }
+.kanban-plugin__item-card-header .kanban-plugin__item-priority-select.is-p2,
+.kanban-plugin__item-card-header .kanban-plugin__item-priority-option.is-p2 { color: var(--color-orange, #d99032); }
+.kanban-plugin__item-card-header .kanban-plugin__item-priority-select.is-p3,
+.kanban-plugin__item-card-header .kanban-plugin__item-priority-option.is-p3 { color: var(--color-green, #4c9b63); }
+
+.kanban-plugin__item-card-header .kanban-plugin__category-select-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.kanban-plugin__item-card-header .kanban-plugin__category-dot {
+  width: 8px;
+  height: 8px;
+  min-width: 8px;
+}
+.kanban-plugin__item-card-header .kanban-plugin__category-label {
+  font-size: 10px;
+  line-height: 1;
+}
+
+.kanban-plugin__item-card-header .kanban-plugin__item-story-points,
+.kanban-plugin__item-card-header .kanban-plugin__item-assignment-picker {
+  min-width: 18px;
+}
+
+/* New tag-based priority drives card border color. */
+.kanban-plugin__item.is-priority-p1 {
+  border-color: var(--color-red, #e05252) !important;
+}
+.kanban-plugin__item.is-priority-p2 {
+  border-color: var(--color-orange, #d99032) !important;
+}
+.kanban-plugin__item.is-priority-p3 {
+  border-color: var(--color-green, #4c9b63) !important;
+}
+
+/* Range picker footer */
+.kanban-plugin__date-range-picker-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 4px 6px 6px;
+}
+.kanban-plugin__date-range-picker-actions button {
+  font-size: 11px;
+  padding: 2px 7px;
+  height: 24px;
+}
+
+/* Kanban Live Cards v5.2 — integrated metadata header -------------------- */
+.kanban-plugin__item-card-header {
+  height: 16px;
+  min-height: 16px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 1px 3px 0;
+  margin: 0 0 1px;
+  overflow: visible;
+}
+
+.kanban-plugin__item-card-header-spacer {
+  flex: 1 1 auto;
+  min-width: 4px;
+  height: 1px;
+}
+
+/* No artificial footer padding anymore. */
+.kanban-plugin__item-card-footer-space {
+  display: none !important;
+}
+
+.kanban-plugin__item-card-header .kanban-plugin__item-date-bubble,
+.kanban-plugin__item-card-header .kanban-plugin__item-priority-select,
+.kanban-plugin__item-card-header .kanban-plugin__category-select,
+.kanban-plugin__item-card-header .kanban-plugin__item-story-points,
+.kanban-plugin__item-card-header .kanban-plugin__item-assignment-picker {
+  min-height: 15px;
+  height: 15px;
+  line-height: 15px;
+  padding: 0 3px;
+  border-radius: 3px;
+  font-size: 10px;
+  color: var(--text-muted);
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.kanban-plugin__item-card-header .kanban-plugin__item-date-bubble:hover,
+.kanban-plugin__item-card-header .kanban-plugin__item-priority-select:hover,
+.kanban-plugin__item-card-header .kanban-plugin__category-select:hover,
+.kanban-plugin__item-card-header .kanban-plugin__item-story-points:hover,
+.kanban-plugin__item-card-header .kanban-plugin__item-assignment-picker:hover {
+  background: var(--background-modifier-hover) !important;
+  color: var(--text-normal);
+}
+
+.kanban-plugin__item-card-header .kanban-plugin__item-date-bubble svg,
+.kanban-plugin__item-card-header .kanban-plugin__item-assignment-picker svg {
+  width: 11px;
+  height: 11px;
+  stroke-width: 1.8;
+}
+
+.kanban-plugin__item-card-header .kanban-plugin__item-assignment-picker {
+  width: 17px;
+  min-width: 17px;
+  padding: 0 2px;
+}
+
+.kanban-plugin__item-card-header .kanban-plugin__item-priority-select {
+  min-width: 18px;
+  padding-inline: 2px;
+}
+
+.kanban-plugin__item-card-header .kanban-plugin__category-select-trigger {
+  gap: 3px;
+  max-width: 110px;
+}
+.kanban-plugin__item-card-header .kanban-plugin__category-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90px;
+}
+.kanban-plugin__item-card-header .kanban-plugin__category-dot {
+  width: 7px;
+  height: 7px;
+  min-width: 7px;
+}
+
+/* Empty controls remain latent; populated controls are part of the card chrome. */
+.kanban-plugin__item-card-header .is-empty {
+  opacity: 0;
+  pointer-events: none;
+}
+.kanban-plugin__item:hover .kanban-plugin__item-card-header .is-empty,
+.kanban-plugin__item:focus-within .kanban-plugin__item-card-header .is-empty {
+  opacity: .62;
+  pointer-events: auto;
+}
+
+/* Range picker: use Obsidian surfaces rather than Flatpickr's light-theme range shadows. */
+.kanban-plugin__date-range-picker {
+  border-radius: var(--radius-m);
+}
+.kanban-plugin__date-range-picker .flatpickr-calendar {
+  background: var(--background-primary) !important;
+  color: var(--text-normal) !important;
+}
+.kanban-plugin__date-range-picker .flatpickr-day.inRange,
+.kanban-plugin__date-range-picker .flatpickr-day.prevMonthDay.inRange,
+.kanban-plugin__date-range-picker .flatpickr-day.nextMonthDay.inRange,
+.kanban-plugin__date-range-picker .flatpickr-day.today.inRange {
+  background: var(--background-modifier-hover) !important;
+  border-color: transparent !important;
+  color: var(--text-normal) !important;
+  box-shadow: none !important;
+}
+.kanban-plugin__date-range-picker .flatpickr-day.startRange,
+.kanban-plugin__date-range-picker .flatpickr-day.endRange,
+.kanban-plugin__date-range-picker .flatpickr-day.startRange:hover,
+.kanban-plugin__date-range-picker .flatpickr-day.endRange:hover {
+  background: var(--interactive-accent) !important;
+  border-color: var(--interactive-accent) !important;
+  color: var(--text-on-accent) !important;
+  box-shadow: none !important;
+}
+.kanban-plugin__date-range-picker-actions {
+  position: static;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 29px;
+  padding: 3px 5px 4px;
+  margin: 2px 4px 4px;
+  border-top: 1px solid var(--background-modifier-border);
+  background: transparent;
+}
+.kanban-plugin__date-range-picker-actions button {
+  width: auto;
+  min-width: 0;
+  height: 22px;
+  padding: 2px 7px;
+  margin: 0;
+  border: 0;
+  border-radius: var(--radius-s);
+  background: transparent;
+  color: var(--text-muted);
+  box-shadow: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: var(--font-ui-smaller);
+}
+.kanban-plugin__date-range-picker-actions button:hover {
+  background: var(--background-modifier-hover);
+  color: var(--text-normal);
+}
+.kanban-plugin__date-range-picker-actions button svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* Search is portaled into Obsidian's native view-actions row. It never overlaps the board. */
+.kanban-plugin__search-toolbar-slot {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  height: 100%;
+  overflow: visible;
+}
+.kanban-plugin__search-toolbar-slot:empty {
+  display: none;
+}
+.kanban-plugin__search-wrapper {
+  position: static !important;
+  width: auto !important;
+  min-width: 0;
+  max-width: min(470px, 52vw);
+  height: 30px;
+  padding: 0 4px 0 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: row;
+  align-items: center !important;
+  gap: 4px;
+  overflow: hidden;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  z-index: auto !important;
+  animation: kanban-search-toolbar-expand 150ms ease-out both;
+}
+@keyframes kanban-search-toolbar-expand {
+  from { max-width: 0; opacity: 0; }
+  to { max-width: min(470px, 52vw); opacity: 1; }
+}
+.kanban-plugin__search-wrapper .kanban-plugin__filter-input {
+  flex: 1 1 220px;
+  width: 220px;
+  min-width: 110px;
+  max-width: 260px;
+  height: 28px;
+  min-height: 28px;
+  margin: 0;
+  padding-block: 3px;
+  font-size: var(--font-ui-small);
+}
+.kanban-plugin__search-due-button,
+.kanban-plugin__search-priority-trigger,
+.kanban-plugin__search-cancel-button {
+  flex: 0 0 auto;
+  height: 28px;
+  min-height: 28px;
+  margin: 0 !important;
+  border: 0;
+  border-radius: var(--radius-s);
+  background: transparent;
+  box-shadow: none;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+}
+.kanban-plugin__search-due-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 28px;
+  max-width: 126px;
+  padding: 4px 6px;
+  white-space: nowrap;
+}
+.kanban-plugin__search-due-button svg {
+  width: 13px;
+  height: 13px;
+}
+.kanban-plugin__search-due-button span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.kanban-plugin__search-due-button.has-value {
+  color: var(--text-normal);
+  background: var(--background-modifier-hover);
+}
+.kanban-plugin__search-priority-picker {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+.kanban-plugin__search-priority-trigger {
+  min-width: 58px;
+  padding: 3px 7px;
+  cursor: var(--cursor);
+}
+.kanban-plugin__search-priority-picker.has-value .kanban-plugin__search-priority-trigger {
+  min-width: 32px;
+  color: var(--text-normal);
+}
+.kanban-plugin__search-priority-picker.is-p1 .kanban-plugin__search-priority-trigger,
+.kanban-plugin__item-priority-dropdown .kanban-plugin__item-priority-option.is-p1 {
+  color: var(--color-red, #e05252);
+}
+.kanban-plugin__search-priority-picker.is-p2 .kanban-plugin__search-priority-trigger,
+.kanban-plugin__item-priority-dropdown .kanban-plugin__item-priority-option.is-p2 {
+  color: var(--color-orange, #d99032);
+}
+.kanban-plugin__search-priority-picker.is-p3 .kanban-plugin__search-priority-trigger,
+.kanban-plugin__item-priority-dropdown .kanban-plugin__item-priority-option.is-p3 {
+  color: var(--color-green, #4c9b63);
+}
+.kanban-plugin__search-cancel-button {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  min-width: 28px;
+  padding: 5px !important;
+}
+.kanban-plugin__search-due-button:hover,
+.kanban-plugin__search-priority-trigger:hover,
+.kanban-plugin__search-cancel-button:hover {
+  background: var(--background-modifier-hover);
+  color: var(--text-normal);
+}
+
+@media (max-width: 720px) {
+  .kanban-plugin__search-wrapper { max-width: 42vw; }
+  .kanban-plugin__search-wrapper .kanban-plugin__filter-input { width: 130px; min-width: 80px; }
+  .kanban-plugin__search-due-button span { display: none; }
+  .kanban-plugin__search-priority-trigger { min-width: 32px; padding-inline: 5px; }
+  .kanban-plugin__search-priority-picker.is-empty .kanban-plugin__search-priority-trigger { font-size: 0; }
+  .kanban-plugin__search-priority-picker.is-empty .kanban-plugin__search-priority-trigger::after { content: "P"; font-size: var(--font-ui-smaller); }
+}
+
+
+/* v5.2.3: keep Search at the far-left edge of Kanban's native action group. */
+.kanban-plugin__search-action {
+  order: -1000 !important;
+}
+.kanban-plugin__search-toolbar-slot {
+  order: -1001 !important;
+}
+
+/* v5.2.3: lane header is the collapse/expand surface. */
+.kanban-plugin__lane-header-wrapper {
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+.kanban-plugin__lane-header-wrapper:hover {
+  background-color: var(--background-modifier-hover);
+}
+.kanban-plugin__lane-collapse {
+  display: none !important;
+}
+.kanban-plugin__lane-grip {
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+.kanban-plugin__lane-header-wrapper:hover .kanban-plugin__lane-grip,
+.kanban-plugin__lane-grip:active {
+  opacity: 1;
+}
+.kanban-plugin__lane-settings-button-wrapper,
+.kanban-plugin__lane-grip,
+.kanban-plugin__lane-input,
+.kanban-plugin__lane-header-wrapper a,
+.kanban-plugin__lane-header-wrapper button {
+  cursor: var(--cursor);
+}
+
+/* v5.2.4: compact lane-header composition
+   [add] [single-line fading title] [drag] [menu] [count] */
+.kanban-plugin__lane-header-wrapper {
+  gap: var(--size-4-1);
+}
+
+.kanban-plugin__lane-add-button-wrapper {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+/* The title owns all spare width but never makes the header taller. */
+.kanban-plugin__lane-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: auto;
+  overflow: hidden;
+  display: block;
+}
+.kanban-plugin__lane-title-text {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  -webkit-mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 18px), transparent 100%);
+  mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 18px), transparent 100%);
+}
+.kanban-plugin__lane-title-text .markdown-preview-view,
+.kanban-plugin__lane-title-text .markdown-rendered,
+.kanban-plugin__lane-title-text p {
+  overflow: hidden;
+  white-space: nowrap !important;
+  margin-block: 0;
+}
+
+/* Keep the right-side action geometry stable, but reveal drag + menu only on hover. */
+.kanban-plugin__lane-grip,
+.kanban-plugin__lane-settings-button-wrapper {
+  flex: 0 0 auto;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 120ms ease;
+}
+.kanban-plugin__lane-header-wrapper:hover .kanban-plugin__lane-grip,
+.kanban-plugin__lane-header-wrapper:hover .kanban-plugin__lane-settings-button-wrapper,
+.kanban-plugin__lane-grip:active,
+.kanban-plugin__lane-settings-button-wrapper:has(.is-enabled) {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Card count is the fixed far-right element. */
+div.kanban-plugin__lane-title-count {
+  flex: 0 0 auto;
+  margin-inline-start: 0;
+}
+
+/* Horizontal collapsed lanes keep their compact existing treatment. */
+.kanban-plugin__lane-wrapper.collapse-horizontal .kanban-plugin__lane-add-button-wrapper {
+  display: none;
+}
+
+/* v5.2.5: lane header polish + stronger priority borders */
+
+/* The title fade is useful horizontally, but looks wrong once the lane header
+   is rotated into the collapsed-horizontal treatment. */
+.kanban-plugin__lane-wrapper.collapse-horizontal .kanban-plugin__lane-title-text {
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+
+/* Add-card spacing requested for the compact lane header. */
+.kanban-plugin__table-cell-wrapper .kanban-plugin__lane-menu,
+.kanban-plugin__table-cell-wrapper .kanban-plugin__item-prefix-button,
+.kanban-plugin__item .kanban-plugin__item-prefix-button,
+.kanban-plugin__item .kanban-plugin__item-postfix-button,
+.kanban-plugin__lane .kanban-plugin__lane-settings-button {
+  padding: 0px;
+  padding-right: 6px;
+  margin-left: -5px;
+}
+
+/* The drag grip takes no horizontal space until the lane header is hovered.
+   Once revealed it physically pushes the title/count left instead of leaving
+   a permanent invisible gap. */
+.kanban-plugin__lane-grip {
+  display: none !important;
+  flex: 0 0 auto !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  color: var(--text-muted);
+  align-items: center;
+  justify-content: center;
+}
+.kanban-plugin__lane-header-wrapper:hover .kanban-plugin__lane-grip,
+.kanban-plugin__lane-grip:active {
+  display: flex !important;
+}
+.kanban-plugin__lane-grip > svg {
+  width: 20px !important;
+  height: 20px !important;
+  stroke-width: 2.25;
+}
+
+/* More-options is once again the fixed far-right control and is always visible.
+   The JS order is title -> grip -> count -> menu. */
+.kanban-plugin__lane-settings-button-wrapper,
+.kanban-plugin__lane-header-wrapper:hover .kanban-plugin__lane-settings-button-wrapper,
+.kanban-plugin__lane-settings-button-wrapper:has(.is-enabled) {
+  display: flex !important;
+  flex: 0 0 auto !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+.kanban-plugin__lane-wrapper.collapse-horizontal .kanban-plugin__lane-settings-button-wrapper {
+  display: flex !important;
+  visibility: visible !important;
+}
+
+/* Restore the more pronounced Dhruv-style priority treatment, mapped onto the
+   new #P1/#P2/#P3 tag priorities. */
+.kanban-plugin__item.is-priority-p1 {
+  border-color: var(--color-red, #e03e3e) !important;
+  box-shadow: 0 0 0 1px var(--color-red, #e03e3e);
+}
+.kanban-plugin__item.is-priority-p2 {
+  border-color: var(--color-orange, #e0a62e) !important;
+  box-shadow: 0 0 0 1px var(--color-orange, #e0a62e);
+}
+.kanban-plugin__item.is-priority-p3 {
+  border-color: var(--color-green, #4caf50) !important;
+  box-shadow: 0 0 0 1px var(--color-green, #4caf50);
+}
+
+/* v5.2.8: H2 columns + H3 swimlanes */
+.kanban-plugin__swimlane-board {
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  min-width: 100%;
+  padding-bottom: var(--size-4-2);
+}
+
+.kanban-plugin__swimlane-columns,
+.kanban-plugin__swimlane-cells {
+  display: flex;
+  align-items: stretch;
+}
+
+.kanban-plugin__swimlane-columns {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--background-primary);
+  padding-block: var(--size-4-1);
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.kanban-plugin__swimlane-column-header {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  min-width: 0;
+  padding-inline: var(--size-4-2);
+}
+
+.kanban-plugin__swimlane-column-header-inner {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 4px;
+  border-radius: var(--radius-s);
+}
+
+/* In swimlane mode the column header is not itself a collapse button. */
+.kanban-plugin__swimlane-column-header-inner.kanban-plugin__lane-header-wrapper {
+  cursor: default;
+}
+
+.kanban-plugin__swimlane-row {
+  width: 100%;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.kanban-plugin__swimlane-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--size-4-2);
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 30px;
+  margin: 0;
+  padding: 5px 10px;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: var(--background-secondary);
+  color: var(--text-normal);
+  text-align: left;
+  cursor: var(--cursor);
+}
+
+.kanban-plugin__swimlane-header:hover {
+  background: var(--background-modifier-hover);
+  box-shadow: none;
+}
+
+.kanban-plugin__swimlane-title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: var(--font-semibold, 600);
+}
+
+.kanban-plugin__swimlane-count {
+  flex: 0 0 auto;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  font-weight: var(--font-normal);
+}
+
+.kanban-plugin__swimlane-row.kanban-plugin__is-collapsed .kanban-plugin__swimlane-header {
+  border-bottom: 0;
+}
+
+.kanban-plugin__swimlane-cell-wrapper {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  min-width: 0;
+  padding: 7px var(--size-4-2) 10px;
+  border-inline-end: 1px solid var(--background-modifier-border);
+}
+
+.kanban-plugin__swimlane-cell-wrapper:last-child {
+  border-inline-end: 0;
+}
+
+.kanban-plugin__swimlane-cell {
+  display: flex;
+  flex-direction: column;
+  min-height: 44px;
+  height: 100%;
+}
+
+.kanban-plugin__swimlane-cell-items {
+  display: flex;
+  flex-direction: column;
+  min-height: 8px;
+}
+
+.kanban-plugin__swimlane-placeholder {
+  width: 100%;
+  min-height: 2px;
+  flex: 0 0 auto;
+}
+
+.kanban-plugin__swimlane-add-card {
+  margin-top: 3px;
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+.kanban-plugin__swimlane-cell:hover .kanban-plugin__swimlane-add-card,
+.kanban-plugin__swimlane-add-card:focus-within {
+  opacity: 1;
+}
+
+.kanban-plugin__swimlane-add-card .kanban-plugin__item-button-wrapper {
+  margin: 0;
+}
+
+.kanban-plugin__swimlane-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--size-4-3);
+}
+
+.kanban-plugin__swimlane-column-header .kanban-plugin__lane-settings-button {
+  padding: 0;
+  padding-right: 6px;
+  margin-left: -5px;
+}
+
+
+/* v6.1 — swimlane structural scrolling and sorting fixes.
+   Swimlane rows must stay aligned across every column, so vertical scrolling is
+   owned by the whole board rather than by individual columns/cells. */
+.kanban-plugin__scroll-container.kanban-plugin__horizontal.kanban-plugin__swimlane-mode {
+  overflow-x: auto !important;
+  overflow-y: auto !important;
+}
+
+.kanban-plugin__board.kanban-plugin__swimlane-mode > div {
+  height: auto !important;
+  min-height: 100%;
+  align-items: stretch;
+}
+
+.kanban-plugin__board.kanban-plugin__swimlane-mode .kanban-plugin__swimlane-board {
+  min-height: 100%;
+}
+
+.kanban-plugin__swimlane-cell-wrapper {
+  display: flex;
+}
+
+/* Match classic Kanban's visual card rhythm inside each swimlane cell. */
+.kanban-plugin__swimlane-cell > .kanban-plugin__item-wrapper + .kanban-plugin__item-wrapper {
+  margin-block-start: 4px;
+}
+
+/* The terminal drop target must have a real hitbox. The previous 2px target made
+   dropping below the final card practically impossible, especially on touch. */
+.kanban-plugin__swimlane-placeholder {
+  min-height: 24px !important;
+  margin-block-start: 4px;
+  border-radius: var(--radius-s);
+}
+
+.kanban-plugin__swimlane-placeholder.is-dropping {
+  background: hsla(var(--interactive-accent-hsl), .12);
+  outline: 1px dashed hsla(var(--interactive-accent-hsl), .65);
+}
+
+
+/* v6.2 — swimlane cell sizing + terminal drop-zone fixes. */
+.kanban-plugin__swimlane-cell-wrapper {
+  align-items: stretch;
+}
+
+/* The wrapper owns the column width; the cell must fill it rather than using
+   the intrinsic width of its card contents. */
+.kanban-plugin__swimlane-cell {
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+  align-self: stretch;
+}
+
+.kanban-plugin__swimlane-cell > .kanban-plugin__item-wrapper {
+  width: 100%;
+  min-width: 0;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+}
+
+/* Match classic Kanban's terminal placeholder behaviour: the final sortable
+   target expands through the unused height of the row. This creates a genuine
+   'after the final card' destination instead of a tiny strip below the stack. */
+.kanban-plugin__swimlane-placeholder {
+  flex: 1 1 44px !important;
+  min-height: 44px !important;
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+
+/* v6.5 — swimlane deletion + collapsed columns in the 2D board. */
+.kanban-plugin__swimlane-board {
+  position: relative;
+}
+
+/* Swimlane headers intentionally sit above collapsed-column title rails. This
+   makes the vertical title appear interrupted whenever a horizontal swimlane
+   separator crosses it, while keeping the swimlane title itself completely
+   readable (including the first swimlane). */
+.kanban-plugin__swimlane-header {
+  position: relative;
+  z-index: 4;
+}
+.kanban-plugin__swimlane-cells {
+  position: relative;
+  z-index: 1;
+}
+
+.kanban-plugin__swimlane-column-header.kanban-plugin__is-collapsed {
+  padding-inline: 3px;
+}
+.kanban-plugin__swimlane-column-header-inner.kanban-plugin__is-collapsed {
+  justify-content: center;
+  padding: 3px 0;
+  cursor: pointer;
+}
+.kanban-plugin__swimlane-column-header-inner.kanban-plugin__is-collapsed .kanban-plugin__lane-settings-button-wrapper {
+  margin: 0;
+}
+
+.kanban-plugin__swimlane-cell-wrapper.kanban-plugin__is-column-collapsed {
+  padding: 0;
+  background: color-mix(in srgb, var(--background-secondary) 38%, transparent);
+}
+.kanban-plugin__swimlane-collapsed-cell {
+  width: 100%;
+  height: 100%;
+  min-height: 44px;
+}
+
+/* A single vertical rail carries the collapsed column title through the whole
+   swimlane stack. It is under the opaque H3 header bars, so those bars mask a
+   clean gap through the title instead of letting the two labels collide. */
+.kanban-plugin__swimlane-collapsed-rail {
+  position: absolute;
+  inset-block: 0;
+  z-index: 2;
+  box-sizing: border-box;
+  border-inline-end: 1px solid var(--background-modifier-border);
+  background: color-mix(in srgb, var(--background-secondary) 22%, transparent);
+  cursor: pointer;
+  overflow: hidden;
+}
+.kanban-plugin__swimlane-collapsed-rail:hover {
+  background: color-mix(in srgb, var(--background-modifier-hover) 65%, transparent);
+}
+.kanban-plugin__swimlane-collapsed-rail-label {
+  position: sticky;
+  top: 54px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding-block: 8px;
+  box-sizing: border-box;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-muted);
+  font-weight: var(--font-semibold, 600);
+  pointer-events: none;
+}
+.kanban-plugin__swimlane-collapsed-rail-count {
+  color: var(--text-faint);
+  font-weight: var(--font-normal);
+  font-size: var(--font-ui-smaller);
+}
+
+.kanban-plugin__swimlane-delete-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  margin-top: var(--size-4-3);
+}
+.kanban-plugin__swimlane-delete-actions > button {
+  width: 100%;
+  text-align: left;
+  justify-content: flex-start;
+}
+.kanban-plugin__swimlane-danger-button {
+  color: var(--text-error) !important;
+  font-weight: 700 !important;
+  border-color: color-mix(in srgb, var(--text-error) 45%, var(--background-modifier-border)) !important;
+}
+.kanban-plugin__swimlane-danger-button:hover {
+  background: color-mix(in srgb, var(--text-error) 12%, var(--background-primary)) !important;
+  color: var(--text-error) !important;
+}
+
+
+/* v6.6 — lane management and compact collapsed columns. */
+.kanban-plugin__swimlane-header {
+  border-radius: 6px;
+  overflow: hidden;
+}
+.kanban-plugin__swimlane-collapse-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  color: var(--text-muted);
+}
+.kanban-plugin__swimlane-collapse-indicator svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Collapsed columns are compact horizontal tabs only. Nothing runs through
+   the swimlane headers anymore. */
+.kanban-plugin__swimlane-column-header.kanban-plugin__is-collapsed {
+  padding-inline: 3px;
+}
+.kanban-plugin__swimlane-column-header-inner.kanban-plugin__is-collapsed {
+  min-width: 0;
+  gap: 2px;
+  padding: 2px 3px;
+  cursor: pointer;
+  writing-mode: horizontal-tb;
+  transform: none;
+}
+.kanban-plugin__swimlane-collapsed-tab {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  flex: 1 1 auto;
+  gap: 4px;
+  padding-inline: 3px;
+  color: var(--text-muted);
+}
+.kanban-plugin__swimlane-collapsed-tab-title {
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: var(--font-semibold, 600);
+}
+.kanban-plugin__swimlane-collapsed-tab-count {
+  flex: 0 0 auto;
+  color: var(--text-faint);
+  font-size: var(--font-ui-smaller);
+}
+.kanban-plugin__swimlane-column-header.kanban-plugin__is-collapsed .kanban-plugin__lane-settings-button-wrapper {
+  flex: 0 0 auto;
+  margin: 0;
+}
+.kanban-plugin__swimlane-collapsed-cell {
+  min-height: 44px;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  background: color-mix(in srgb, var(--background-secondary) 22%, transparent);
+}
+.kanban-plugin__swimlane-collapsed-cell:hover {
+  background: color-mix(in srgb, var(--background-modifier-hover) 40%, transparent);
+}
+/* Retire the v6.5 vertical rail completely. */
+.kanban-plugin__swimlane-collapsed-rail { display: none !important; }
+
+.kanban-plugin__swimlane-manager-popover {
+  position: fixed;
+  z-index: var(--layer-popover, 1000);
+  width: min(300px, calc(100vw - 16px));
+  max-height: min(440px, calc(100vh - 16px));
+  overflow: auto;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m, 8px);
+  background: var(--background-primary);
+  box-shadow: var(--shadow-s);
+}
+.kanban-plugin__swimlane-manager-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 4px 8px;
+  font-weight: var(--font-semibold, 600);
+}
+.kanban-plugin__swimlane-manager-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.kanban-plugin__swimlane-manager-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 2px 4px 2px 8px;
+  border-radius: var(--radius-s, 5px);
+  background: var(--background-secondary);
+}
+.kanban-plugin__swimlane-manager-name {
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.kanban-plugin__swimlane-manager-order {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+}
+.kanban-plugin__swimlane-manager-order button {
+  padding: 3px;
+}
+.kanban-plugin__swimlane-manager-order button:disabled {
+  opacity: .25;
+}
+.kanban-plugin__swimlane-manager-empty {
+  padding: 8px;
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+}
+.kanban-plugin__swimlane-manager-add {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--background-modifier-border);
+}
+.kanban-plugin__swimlane-manager-add input {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.kanban-plugin__swimlane-manager-add button {
+  flex: 0 0 auto;
+}
+.kanban-plugin__swimlane-rename-modal input.is-invalid {
+  border-color: var(--text-error);
+}
+
+
+/* v6.7 — restore vertical collapsed-column labels with hover-aware layering. */
+/* Swimlane labels return to normal left alignment. */
+.kanban-plugin__swimlane-header {
+  justify-content: flex-start;
+  text-align: left;
+  z-index: 4;
+}
+.kanban-plugin__swimlane-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: left;
+}
+.kanban-plugin__swimlane-count {
+  margin-left: auto;
+}
+
+/* A hovered H3 header temporarily comes above the floating collapsed-column
+   label, so the swimlane name is always the foreground interaction target. */
+.kanban-plugin__swimlane-header:hover {
+  z-index: 12;
+}
+
+/* Back to the narrow collapsed-column geometry. The top H2 header only keeps
+   its menu/control; the readable title is carried by the vertical overlay. */
+.kanban-plugin__swimlane-column-header.kanban-plugin__is-collapsed {
+  padding-inline: 3px;
+}
+.kanban-plugin__swimlane-column-header-inner.kanban-plugin__is-collapsed {
+  min-width: 0;
+  justify-content: center;
+  gap: 0;
+  padding: 3px 0;
+  cursor: pointer;
+  writing-mode: horizontal-tb;
+  transform: none;
+}
+.kanban-plugin__swimlane-column-header.kanban-plugin__is-collapsed .kanban-plugin__lane-settings-button-wrapper {
+  margin: 0;
+}
+.kanban-plugin__swimlane-collapsed-tab {
+  display: none !important;
+}
+
+/* The rail itself is intentionally transparent and non-interactive. It only
+   positions the vertical label over the normal grey swimlane header strips;
+   the underlying row header therefore still receives hover/click events. */
+.kanban-plugin__swimlane-collapsed-rail {
+  display: block !important;
+  position: absolute;
+  inset-block: 0;
+  z-index: 7;
+  box-sizing: border-box;
+  border-inline-end: 1px solid var(--background-modifier-border);
+  background: transparent;
+  overflow: visible;
+  pointer-events: none;
+}
+.kanban-plugin__swimlane-collapsed-rail-label {
+  position: sticky;
+  top: 54px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: max-content;
+  max-width: 34px;
+  margin-inline: auto;
+  padding: 7px 4px;
+  box-sizing: border-box;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--background-primary) 72%, transparent);
+  color: var(--text-muted);
+  font-weight: var(--font-semibold, 600);
+  line-height: 1.15;
+  box-shadow: 0 1px 4px color-mix(in srgb, var(--background-primary) 55%, transparent);
+  pointer-events: none;
+}
+.kanban-plugin__swimlane-collapsed-rail-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.kanban-plugin__swimlane-collapsed-rail-count {
+  color: var(--text-faint);
+  font-weight: var(--font-normal);
+  font-size: var(--font-ui-smaller);
+}
+
+/* Keep a clear, clickable narrow strip in expanded swimlane bodies. */
+.kanban-plugin__swimlane-cell-wrapper.kanban-plugin__is-column-collapsed {
+  padding: 0;
+}
+.kanban-plugin__swimlane-collapsed-cell {
+  min-height: 44px;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background: color-mix(in srgb, var(--background-secondary) 22%, transparent);
+}
+.kanban-plugin__swimlane-collapsed-cell:hover {
+  background: color-mix(in srgb, var(--background-modifier-hover) 40%, transparent);
+}
+
+
+/* v6.8 — drag-sort swimlane manager + cleaner vertical collapsed columns. */
+
+/* Manager: replace up/down cascades with a draggable grip and insertion line. */
+.kanban-plugin__swimlane-manager-row {
+  position: relative;
+  gap: 7px;
+  padding: 3px 7px 3px 4px;
+  user-select: none;
+}
+.kanban-plugin__swimlane-manager-order {
+  display: none !important;
+}
+.kanban-plugin__swimlane-manager-grip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 24px;
+  height: 26px;
+  color: var(--text-faint);
+  cursor: grab;
+}
+.kanban-plugin__swimlane-manager-grip:hover {
+  color: var(--text-muted);
+  background: var(--background-modifier-hover);
+}
+.kanban-plugin__swimlane-manager-grip:active {
+  cursor: grabbing;
+}
+.kanban-plugin__swimlane-manager-row.kanban-plugin__is-dragging {
+  opacity: .42;
+}
+.kanban-plugin__swimlane-manager-row.kanban-plugin__drop-before::before,
+.kanban-plugin__swimlane-manager-row.kanban-plugin__drop-after::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--interactive-accent);
+  pointer-events: none;
+  z-index: 2;
+}
+.kanban-plugin__swimlane-manager-row.kanban-plugin__drop-before::before {
+  top: -3px;
+}
+.kanban-plugin__swimlane-manager-row.kanban-plugin__drop-after::after {
+  bottom: -3px;
+}
+
+/* Collapsed swimlane columns: no menu/control at the top. The vertical title
+   begins at the top edge and keeps the normal UI text treatment. */
+.kanban-plugin__swimlane-column-header.kanban-plugin__is-collapsed .kanban-plugin__lane-settings-button-wrapper,
+.kanban-plugin__swimlane-column-header.kanban-plugin__is-collapsed .kanban-plugin__lane-settings-button {
+  display: none !important;
+}
+.kanban-plugin__swimlane-column-header.kanban-plugin__is-collapsed,
+.kanban-plugin__swimlane-column-header-inner.kanban-plugin__is-collapsed {
+  padding: 0 !important;
+  min-height: 0;
+}
+
+/* Center the vertical title in the 42px rail. The rail has no backdrop at all. */
+.kanban-plugin__swimlane-collapsed-rail {
+  display: flex !important;
+  justify-content: center;
+  align-items: flex-start;
+  background: transparent !important;
+}
+.kanban-plugin__swimlane-collapsed-rail-label {
+  position: sticky;
+  top: 4px;
+  width: max-content;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--text-normal);
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: var(--font-normal);
+  line-height: var(--line-height-normal, 1.5);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: clip;
+  pointer-events: none;
+  /* Theme-colored halo erases the swimlane/header content immediately under
+     the glyphs without drawing a visible pill or strip. */
+  text-shadow:
+    0 0 1px var(--background-primary),
+    0 0 2px var(--background-primary),
+    0 0 3px var(--background-primary),
+    0 0 5px var(--background-primary),
+    0 0 8px var(--background-primary),
+    1px 0 5px var(--background-primary),
+    -1px 0 5px var(--background-primary);
+}
+.kanban-plugin__swimlane-collapsed-rail-title {
+  overflow: visible;
+  text-overflow: clip;
+  font: inherit;
+  color: inherit;
+}
+.kanban-plugin__swimlane-collapsed-rail-count {
+  color: var(--text-muted);
+  font-weight: var(--font-normal);
+  font-size: var(--font-ui-smaller);
+  text-shadow: inherit;
+}
+
+/* Preserve the v6.7 layering rule: normally the vertical title floats over
+   H3 bars; hovering a swimlane header promotes that header over the title. */
+.kanban-plugin__swimlane-collapsed-rail { z-index: 7; }
+.kanban-plugin__swimlane-header { z-index: 4; }
+.kanban-plugin__swimlane-header:hover { z-index: 12; }
+
+
+/* v6.9 — collapsed-column layering + swimlane header/add-card alignment. */
+
+/* Default layering is deliberately inverted from v6.8: H3 swimlane headers
+   cover the vertical collapsed-column title. Hovering the collapsed strip
+   promotes that column above the H3 bars, so its title becomes fully legible. */
+.kanban-plugin__swimlane-collapsed-rail {
+  z-index: 3 !important;
+  pointer-events: auto !important;
+  cursor: pointer;
+  background: transparent !important;
+}
+.kanban-plugin__swimlane-header {
+  position: relative;
+  z-index: 8 !important;
+}
+.kanban-plugin__swimlane-header:hover {
+  z-index: 8 !important;
+}
+.kanban-plugin__swimlane-collapsed-rail:hover {
+  z-index: 16 !important;
+  background: transparent !important;
+}
+/* Keep the v6.8 text-only floating/knockout treatment; no pill appears on hover. */
+.kanban-plugin__swimlane-collapsed-rail:hover .kanban-plugin__swimlane-collapsed-rail-label {
+  background: transparent !important;
+}
+
+/* Swimlane-mode H2 headers: use a symmetric cell inset and let the actual
+   hover/click box fill exactly that inset instead of leaning left. */
+.kanban-plugin__swimlane-column-header:not(.kanban-plugin__is-collapsed) {
+  padding-inline: var(--size-4-2) !important;
+}
+.kanban-plugin__swimlane-column-header:not(.kanban-plugin__is-collapsed) .kanban-plugin__swimlane-column-header-inner {
+  width: 100% !important;
+  margin: 0 !important;
+  padding-block: 6px !important;
+  padding-inline: 6px !important;
+  box-sizing: border-box;
+}
+
+/* Grid-level add-card control: centered hit/hover geometry. */
+.kanban-plugin__swimlane-add-card {
+  width: 100%;
+  box-sizing: border-box;
+}
+.kanban-plugin__swimlane-add-card .kanban-plugin__item-button-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 4px 0 !important;
+  margin: 0 !important;
+}
+.kanban-plugin__swimlane-add-card .kanban-plugin__new-item-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 !important;
+  padding: 6px 8px !important;
+  text-align: center !important;
+}
+
+
+/* v6.10 — correct collapsed-title stacking + exact header/button geometry. */
+
+/* The swimlane bar is split into layers:
+   1) its grey/hover background,
+   2) the collapsed vertical column title,
+   3) the swimlane's chevron/title/count.
+   This keeps the vertical title visible over the strip without obscuring the
+   H3 label. Hovering the collapsed column then promotes its title above all. */
+.kanban-plugin__swimlane-header {
+  position: relative !important;
+  z-index: auto !important;
+  background: transparent !important;
+  isolation: auto !important;
+}
+.kanban-plugin__swimlane-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--background-secondary);
+  z-index: 1;
+  pointer-events: none;
+}
+.kanban-plugin__swimlane-header:hover::before {
+  background: var(--background-modifier-hover);
+}
+.kanban-plugin__swimlane-header > * {
+  position: relative;
+  z-index: 5;
+}
+
+.kanban-plugin__swimlane-collapsed-rail {
+  z-index: 3 !important;
+  pointer-events: auto !important;
+  cursor: pointer;
+  background: transparent !important;
+  transition: background-color 120ms ease, box-shadow 120ms ease;
+}
+/* Restore a visible hover response for the whole narrow collapsed column. */
+.kanban-plugin__swimlane-collapsed-rail:hover {
+  z-index: 12 !important;
+  background: color-mix(in srgb, var(--background-modifier-hover) 58%, transparent) !important;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text-faint) 22%, transparent);
+}
+
+/* Much broader theme-coloured knockout halo behind the vertical text. */
+.kanban-plugin__swimlane-collapsed-rail-label,
+.kanban-plugin__swimlane-collapsed-rail-title,
+.kanban-plugin__swimlane-collapsed-rail-count {
+  text-shadow:
+    0 0 2px var(--background-primary),
+    0 0 4px var(--background-primary),
+    0 0 7px var(--background-primary),
+    0 0 10px var(--background-primary),
+    0 0 14px var(--background-primary),
+    0 0 18px var(--background-primary),
+    2px 0 10px var(--background-primary),
+    -2px 0 10px var(--background-primary),
+    4px 0 14px var(--background-primary),
+    -4px 0 14px var(--background-primary) !important;
+}
+
+/* Make the hover/collapse box for each normal H2 column explicitly symmetric.
+   The background belongs to the inner wrapper, so use a real 8px margin rather
+   than relying on nested padding + the old negative button offset. */
+.kanban-plugin__swimlane-column-header:not(.kanban-plugin__is-collapsed) {
+  padding: 0 !important;
+}
+.kanban-plugin__swimlane-column-header:not(.kanban-plugin__is-collapsed) > .kanban-plugin__swimlane-column-header-inner {
+  width: calc(100% - 16px) !important;
+  margin: 0 8px !important;
+  padding: 8px !important;
+  box-sizing: border-box !important;
+}
+/* The old compact-header rule pulled this button 5px left. That looks correct
+   in classic lanes but offsets the whole visual rhythm in the swimlane header. */
+.kanban-plugin__swimlane-column-header:not(.kanban-plugin__is-collapsed) .kanban-plugin__lane-add-button-wrapper .kanban-plugin__lane-settings-button,
+.kanban-plugin__swimlane-column-header:not(.kanban-plugin__is-collapsed) .kanban-plugin__lane-settings-button {
+  margin-left: 0 !important;
+}
+
+/* Flex whitespace is not dependable between the plus span and text node. */
+.kanban-plugin__swimlane-add-card .kanban-plugin__item-button-plus {
+  margin-inline-end: 4px !important;
+}
+
+
+/* v6.11 — collapsed-column stacking model.
+   The vertical title spans from the very top of the collapsed column. It sits
+   above the normal H2 column-header row, but below the opaque H3 swimlane bars.
+   Hovering the collapsed column promotes the rail/title over everything. */
+.kanban-plugin__swimlane-collapsed-rail {
+  z-index: 6 !important;
+  background: transparent !important;
+  pointer-events: auto !important;
+  cursor: pointer;
+}
+.kanban-plugin__swimlane-collapsed-rail-label {
+  top: 0 !important;
+}
+
+/* Normal H2 headers no longer mask the vertical title. */
+.kanban-plugin__swimlane-columns {
+  z-index: 5 !important;
+}
+
+/* The complete H3 lane bar floats above the vertical title by default. */
+.kanban-plugin__swimlane-header {
+  position: relative !important;
+  z-index: 8 !important;
+}
+
+/* Hovering the collapsed column brings its title/rail entirely to the front
+   and gives the otherwise transparent strip a light theme-aware response. */
+.kanban-plugin__swimlane-collapsed-rail:hover {
+  z-index: 16 !important;
+  background: color-mix(in srgb, var(--background-modifier-hover) 58%, transparent) !important;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text-faint) 18%, transparent) !important;
+}
+
+/* No permanent grey fill in collapsed column cells. The rail owns the hover
+   response, so the column is visually transparent until it is interacted with. */
+.kanban-plugin__swimlane-cell-wrapper.kanban-plugin__is-column-collapsed,
+.kanban-plugin__swimlane-collapsed-cell {
+  background: transparent !important;
+}
+.kanban-plugin__swimlane-collapsed-cell:hover {
+  background: transparent !important;
+}
+
+
+/* v6.12 — final collapsed-rail stacking + full-content hover surface.
+   Keep the vertical title above the H2 column-header row, below H3 swimlane
+   bars, and promote it only when the collapsed rail itself is hovered. */
+
+/* The swimlane board must size to its content vertically. The generic board
+   wrapper is a flex row, and align-items:stretch was constraining this child to
+   one viewport height while its swimlane rows overflowed. That also limited the
+   absolute collapsed-column rail/hover surface to one viewport. */
+.kanban-plugin__board.kanban-plugin__swimlane-mode > div {
+  align-items: flex-start !important;
+}
+.kanban-plugin__board.kanban-plugin__swimlane-mode .kanban-plugin__swimlane-board {
+  align-self: flex-start !important;
+  height: auto !important;
+  min-height: 100% !important;
+}
+
+/* Explicit board-level stacking order:
+      10  sticky H2 column headers
+      20  collapsed vertical title rail
+      30  H3 swimlane header bars
+      40  collapsed rail while that column itself is hovered
+   H3 hover intentionally does not alter its layer. */
+.kanban-plugin__swimlane-columns {
+  position: sticky !important;
+  z-index: 10 !important;
+}
+.kanban-plugin__swimlane-collapsed-rail {
+  inset-block: 0 !important;
+  z-index: 20 !important;
+  background: transparent !important;
+}
+.kanban-plugin__swimlane-header,
+.kanban-plugin__swimlane-header:hover {
+  position: relative !important;
+  z-index: 30 !important;
+}
+.kanban-plugin__swimlane-collapsed-rail:hover {
+  z-index: 40 !important;
+  background: color-mix(in srgb, var(--background-modifier-hover) 58%, transparent) !important;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text-faint) 18%, transparent) !important;
+}
+
+/* The swimlane bar itself is always opaque, including on hover. Some Obsidian
+   themes define --background-modifier-hover with alpha; layering that over an
+   opaque secondary background prevents the hidden vertical title from bleeding
+   through when a swimlane header is hovered. */
+.kanban-plugin__swimlane-header::before {
+  z-index: 1 !important;
+  background: var(--background-secondary) !important;
+  box-shadow:
+    0 -3px 7px 1px color-mix(in srgb, var(--background-primary) 76%, transparent),
+    0  3px 7px 1px color-mix(in srgb, var(--background-primary) 76%, transparent) !important;
+}
+.kanban-plugin__swimlane-header:hover::before {
+  background:
+    linear-gradient(var(--background-modifier-hover), var(--background-modifier-hover)),
+    var(--background-secondary) !important;
+}
+.kanban-plugin__swimlane-header > * {
+  position: relative;
+  z-index: 2 !important;
+}
+
+/* Keep the vertical label pinned to the very beginning of the collapsed rail.
+   Its broad theme-aware knockout remains useful when the rail is promoted on
+   hover; the H3 bar shadow above softly erases it at intersections otherwise. */
+.kanban-plugin__swimlane-collapsed-rail-label {
+  top: 0 !important;
+}
+
+/* v6.13 — visible theme-aware knockout at H3/collapsed-title crossings.
+   Use opaque theme background rather than translucent color-mix so the effect
+   actually erases the vertical title for a few pixels around the lane bar. */
+.kanban-plugin__swimlane-header::before {
+  box-shadow:
+    0 -5px 11px 4px var(--background-primary),
+    0  5px 11px 4px var(--background-primary),
+    0 -2px 4px 1px var(--background-secondary),
+    0  2px 4px 1px var(--background-secondary) !important;
+}
+
+/* v6.14: priority, Dataview-style dates, assignment */
+.kanban-plugin__item.is-priority-p1,
+.kanban-plugin__item.is-priority-p2,
+.kanban-plugin__item.is-priority-p3 {
+  border-width: 2px !important;
+  box-shadow: none !important;
+}
+.kanban-plugin__item.is-priority-p3 {
+  border-color: #4e75ed !important;
+}
+.kanban-plugin__item-card-header .kanban-plugin__item-priority-select.is-p3,
+.kanban-plugin__item-priority-dropdown .kanban-plugin__item-priority-option.is-p3,
+.kanban-plugin__search-priority-picker.is-p3 .kanban-plugin__search-priority-trigger {
+  color: #4e75ed !important;
+}
+
+.kanban-plugin__item-card-header .kanban-plugin__item-assignment-picker.has-value {
+  width: auto;
+  min-width: 20px;
+  font-weight: 650;
+  letter-spacing: .02em;
+  color: var(--text-normal);
+}
+.kanban-plugin__item-assignment-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 14px;
+}
+.kanban-plugin__item-assignment-dropdown {
+  position: fixed;
+  z-index: var(--layer-menu);
+  min-width: 170px;
+  max-width: 260px;
+  padding: 4px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-s);
+  background: var(--background-primary);
+  box-shadow: var(--shadow-s);
+}
+.kanban-plugin__item-assignment-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 30px;
+  padding: 4px 8px;
+  border-radius: var(--radius-s);
+  color: var(--text-normal);
+  cursor: var(--cursor);
+  white-space: nowrap;
+}
+.kanban-plugin__item-assignment-option:hover,
+.kanban-plugin__item-assignment-option.is-selected {
+  background: var(--background-modifier-hover);
+}
+.kanban-plugin__item-assignment-option.is-disabled {
+  color: var(--text-faint);
+  cursor: default;
+}
+.kanban-plugin__item-assignment-initials {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding-inline: 4px;
+  border-radius: 999px;
+  background: var(--background-secondary);
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 700;
+}

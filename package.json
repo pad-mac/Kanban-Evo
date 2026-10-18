@@ -1,0 +1,12 @@
+{
+  "name": "obsidian-kanban-livecards",
+  "version": "6.14.0",
+  "private": true,
+  "description": "Agent-editable source snapshot of the customized Obsidian Kanban fork.",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node --check src/main.js",
+    "clean": "node scripts/clean.mjs"
+  }
+}
