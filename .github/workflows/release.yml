@@ -1,0 +1,56 @@
+name: Release
+
+# Push a tag that equals manifest.json "version" (e.g. 6.14.1, no "v" prefix).
+# The workflow checks, builds and publishes main.js, manifest.json and styles.css
+# as release assets — the layout BRAT and Obsidian expect.
+
+on:
+  push:
+    tags:
+      - "*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to release (must equal manifest.json version)"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Resolve tag
+        id: tag
+        run: |
+          TAG="${{ github.event.inputs.tag || github.ref_name }}"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+      - name: Verify tag matches manifest version
+        run: |
+          MANIFEST_VERSION=$(node -p "require('./manifest.json').version")
+          if [ "$MANIFEST_VERSION" != "${{ steps.tag.outputs.tag }}" ]; then
+            echo "::error::Tag ${{ steps.tag.outputs.tag }} does not match manifest.json version $MANIFEST_VERSION"
+            exit 1
+          fi
+
+      - name: Check and build
+        run: |
+          npm run check
+          npm run build
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${{ steps.tag.outputs.tag }}" \
+            dist/main.js dist/manifest.json dist/styles.css \
+            --title "${{ steps.tag.outputs.tag }}" \
+            --generate-notes
